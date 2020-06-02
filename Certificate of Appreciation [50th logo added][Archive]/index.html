@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      /*
+      {{placeholder-toggle-new}}
+      {{show-crop}}
+      {{placeholder-opacity}}
+      {{placeholder-image-1}}
+      {{JCU_presenter-signature-1--coa}}
+      {{JCU_presenter-name-1--coa}}
+      {{{JCU_presenter-signature-2--coa}}}
+      {{JCU_presenter-name-2--coa}}
+      {{JCU_date--coa}}
+      {{logo-primary}}
+      {{JCU_supporter-logo--coa}}
+      {{JCU_certificate-details--coa}}
+      */
+
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Engravers%20MT/stylesheet.css');
+
+      :root {
+        --grey: {{{account.colors.grey}}};
+        --white: {{{account.colors.white}}};
+      }
+
+      html {
+        font-family: 'Bliss 2';
+        font-size: 0.287rem;
+        font-weight: 300;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        font-size: 0;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 1.58rem 1.73rem 1.62rem 1.74rem;
+      }
+
+      .backgroundImage {
+        display: none;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+      }
+
+      .backgroundImage--coral,
+      .backgroundImage--plane {
+        display: block;
+      }
+
+      .backgroundImage--coral {
+        background-image: url(https://files.outfit.io/media_library_items/111853/93934880.jpg);
+      }
+
+      .backgroundImage--plane {
+        background-image: url(https://files.outfit.io/media_library_items/53693/Medicine_Poster%2520Template.png);
+      }
+
+      .header {
+        display: flex;
+        position: relative;
+        justify-content: space-around;
+        align-content: center;
+        margin-bottom: 2.12rem;
+        height: 2rem;
+        padding: 0 1.6rem;
+      }
+
+      .logo, .mainLogo, .fiftiethLogo {
+        width: 3.45rem;
+        height: 1.98rem;
+        font-size: 0;
+        object-fit: contain;
+        object-position: center;
+      }
+      
+      .logo.secondary .mainLogo {
+        display: none;
+      }
+      .logo.primary .fiftiethLogo {
+        display: none;
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .title {
+        margin-bottom: 1.86rem;
+        font-size: 0.504rem;
+        text-transform: uppercase;
+        font-family: 'Chronicle Display';
+        line-height: 1.2em;
+        font-weight: 500;
+      }
+
+      .info__label {
+        margin-bottom: 1.03rem;
+        font-size: 0.313rem;
+      }
+
+      .info__name {
+        margin-bottom: 0.9rem;
+        font-size: 0.494rem;
+        font-family: 'Chronicle Display';
+        font-weight: 500;
+      }
+
+      .info__details {
+        font-size: 0.31rem;
+      }
+
+      .footer {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .presenter__container {
+        display: flex;
+        width: 100%;
+        min-height: 2.9rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .presenter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 43.2%;
+        min-height: 1.45rem;
+      }
+
+      .presenter--secondary {
+        width: 31.7%;
+        margin-top: 0.03rem;
+      }
+
+      .presenter:first-child {
+        margin-right: 0.7rem;
+      }
+
+      .presenter:nth-child(2),
+      .presenter.u-hide + .presenter {
+        margin-left: 0.67rem;
+        margin-right: 0.03rem;
+        width: 43.2%;
+      }
+
+      .presenter__signature {
+        display: flex;
+        position: relative;
+        margin-bottom: 0.19rem;
+        width: 3.557rem;
+        justify-content: center;
+      }
+
+      .presenter--secondary .presenter__signature {
+        width: 2.85rem;
+        font-size: 0.313rem;
+      }
+
+      .presenter__signature img {
+        width: 3.557rem;
+        height: 0.9rem;
+        object-fit: contain;
+        object-position: center bottom;
+      }
+
+      .presenter__line {
+        width: 100%;
+        height: 0.02em;
+        border-top: 0.01em solid var(--grey);
+      }
+
+      .presenter__label {
+        font-size: 0.26rem;
+      }
+
+      .presenter--secondary .presenter__label {
+        margin-right: 0.1rem;
+      }
+
+      .footer__info {
+        text-align: left;
+        width: 100%;
+        margin-top: 1.2rem;
+        padding-left: 2.48rem;
+        font-size: 0.17rem;
+        line-height: 1.3em;
+        border-top: 0.1em solid var(--grey);
+      }
+
+      .footer__info span {
+        margin-right: 0.18rem;
+      }
+
+      .footer__info span:first-child {
+        margin-right: 0.175rem;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .footer__info span:last-child {
+        margin: 0rem;
+        font-size: 0.18rem;
+      }
+
+      .errorPopup {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        padding: 2% 5%;
+        background: #fff;
+        border: 3px solid red;
+        transform: translate(-50%, -50%);
+        color: red;
+        font-size: 0.5rem;
+        z-index: 99;
+        text-align: center;
+      }
+
+      .errorPopup--show { display: block; }
+
+      .u-hide { display: none; }
+      
+      
+     
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="master">
+      <div class="js-inject-src" data-target-id="logo" data-is-image="true">{{{JCU_supporter-logo--coa}}}</div>
+      <div class="js-inject-src" data-target-id="signature-1" data-is-image="true">
+        {{{JCU_presenter-signature-1--coa}}}{{^JCU_presenter-signature-1--coa}}https://files.outfit.io/media_library_items/115036/signature-placeholder.png{{/JCU_presenter-signature-1--coa}}
+      </div>
+      <div class="js-inject-src" data-target-id="signature-2" data-is-image="true">{{{JCU_presenter-signature-2--coa}}}</div>
+      <div class="js-inject-src" data-target-id="name-1">{{{JCU_presenter-name-1--coa}}}{{^JCU_presenter-name-1--coa}}Name Surname{{/JCU_presenter-name-1--coa}}</div>
+      <div class="js-inject-src" data-target-id="name-2">{{{JCU_presenter-name-2--coa}}}{{^JCU_presenter-name-2--coa}}Name Surname{{/JCU_presenter-name-2--coa}}</div>
+      <div class="js-inject-src" data-target-id="date">{{{JCU_date--coa}}}{{^JCU_date--coa}}DD/MM/YYYY{{/JCU_date--coa}}</div>
+    </div> <!--master-->
+
+    {{ #spreadsheet.certificate-details }}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="errorPopup">Incorrect or misspelled Background Image keyword.</div>
+          <div class="backgroundImage js-backgroundImage">{{{JCU_background-image--coa}}}</div><!--backgroundImg-->
+          <div class="header">
+            <div class="logo {{{logo-primary}}} "> 
+              <img class="mainLogo" src="https://files.outfit.io/media_library_items/110750/JCU-Logo---Shield-RGB.png" />
+              <img class="fiftiethLogo" src="https://files.outfit.io/media_library_items/163882/JCU%252050th%2520Logo%2520-%2520Shield%2520RGB.jpg" />
+            </div> <!--logo-->
+            <img class="logo logo--support" src="#" data-target="logo"/> <!--logo__support-->
+          </div> <!--header-->
+          <div class="body">
+            <div class="title" data-max-line="4">{{{JCU_certificate-title--coa}}}</div> <!--title-->
+            <div class="info">
+              <div class="info__label">Awarded to</div> <!--info__label-->
+              <div class="info__name" data-max-line="3">{{{JCU_neme-of-recipient--coa}}}</div> <!--info__name-->
+              <div class="info__details" data-max-line="4">{{{JCU_certificate-details--coa}}}</div> <!--info__details-->
+            </div> <!--info-->
+          </div> <!--body-->
+          <div class="footer">
+            <div class="presenter__container">
+              <div class="presenter">
+                <div class="presenter__signature">
+                  <img src="#" data-target="signature-1"/> 
+                </div> <!--presenter__signature-->
+                <div class="presenter__line"></div> <!--presenter__line-->
+                <div class="presenter__label" data-target="name-1" data-max-line="3"></div> <!--presenter__label-->
+              </div> <!--presenter-->
+              <div class="presenter presenter--primary {{^JCU_presenter-name-2--coa}}u{{/JCU_presenter-name-2--coa}}{{^JCU_presenter-signature-2--coa}}-hide{{/JCU_presenter-signature-2--coa}}">
+                <div class="presenter__signature">
+                  <img src="#" data-target="signature-2"/>
+                </div> <!--presenter__signature-->
+                <div class="presenter__line"></div> <!--presenter__line-->
+                <div class="presenter__label" data-target="name-2" data-max-line="3"></div> <!--presenter__label-->
+              </div> <!--presenter-->
+              <div class="presenter presenter--secondary">
+                <div class="presenter__signature" data-target="date" data-max-line="1"></div> <!--presenter__signature-->
+                <div class="presenter__line"></div> <!--presenter__line-->
+                <div class="presenter__label">Date</div> <!--presenter__label-->
+              </div> <!--presenter-->
+            </div> <!--presenter__container-->
+            <div class="footer__info"><span>James Cook University</span><span>ABN 46 253 211 955</span><span class="cricos">{{{account.snippets.jcu-cricos}}}</span></div> <!--footer__info-->
+          </div> <!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{ /spreadsheet.certificate-details }}
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      } 
+
+      function togglePresenter() {
+        const presenters = document.querySelectorAll('.presenter--primary');
+/*
+        presenters.forEach(presenter => {
+          if ( presenter.querySelector('.u-hide') !== null ) presenter.classList.add('u-hide');
+        })
+        */
+      }
+
+      function dynamicBackground(keywords) {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+          const image = page.querySelector('.js-backgroundImage');
+          const imageName = image.innerText.toLowerCase();
+          const errorPopup = page.querySelector('.errorPopup');
+          let keyWordMatch = false;          
+
+          image.classList.add(`backgroundImage--${imageName}`);
+          keywords.forEach(keyword => {
+            if ( imageName == keyword || imageName == '' ) keyWordMatch = true;
+          });
+
+          if ( !keyWordMatch ) errorPopup.classList.add('errorPopup--show');
+        })
+      }
+
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+        togglePresenter();
+        dynamicBackground(['coral', 'plane']);
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
