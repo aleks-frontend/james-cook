@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Engravers%20MT/stylesheet.css');
+
+      :root {
+        --omega-blue: {{{account.colors.midnight-blue-omega}}};
+        --omega-green:  {{{account.colors.dark-green-omega}}};
+        --omega-orange: {{{account.colors.dark-orange-omega}}};
+        --omega-red: {{{account.colors.dark-red-omega}}};
+        --delta-blue: {{{account.colors.dark-blue-delta}}};
+        --delta-green: {{{account.colors.mid-green-delta}}};
+        --delta-orange: {{{account.colors.mid-orange-delta}}};
+        --delta-red: {{{account.colors.mid-red-delta}}};
+        --shield-blue: {{{account.colors.primary}}};
+        --yellow: {{{account.colors.bright-orange-gamma}}};
+        --gray: {{{account.colors.grey}}};
+        --white: {{{account.colors.white}}};
+        --black: {{{account.colors.black}}};
+      }
+
+      .themeColour--blue {
+        --dynamic-colour: var(--delta-blue);
+      }
+
+      .themeColour--green {
+        --dynamic-colour: var(--omega-green);
+      }
+
+      .themeColour--orange {
+        --dynamic-colour: var(--omega-orange);
+      }
+
+      .themeColour--red {
+        --dynamic-colour: var(--omega-red);
+      }
+
+      .bannerColour--blue {
+        --dynamic-banner-colour: var(--delta-blue);
+      }
+
+      .bannerColour--green {
+        --dynamic-banner-colour: var(--omega-green);
+      }
+
+      .bannerColour--orange {
+        --dynamic-banner-colour: var(--omega-orange);
+      }
+
+      .bannerColour--red {
+        --dynamic-banner-colour: var(--omega-red);
+      }
+
+      .textColour--white {
+        --dynamic-text-colour: var(--white);
+      }
+
+      .textColour--gray {
+        --dynamic-text-colour: var(--gray);
+      }
+
+      .textColour--blue {
+        --dynamic-text-colour: var(--delta-blue);
+      }
+
+      .textColour--green {
+        --dynamic-text-colour: var(--delta-green);
+      }
+
+      .textColour--orange {
+        --dynamic-text-colour: var(--delta-orange);
+      }
+
+      .textColour--red {
+        --dynamic-text-colour: var(--delta-red);
+      }
+      
+      .textColour--black {
+        --dynamic-text-colour: var(--black);
+      }
+
+      .quotationMarksColour--white {
+        --dynamic-quotes-colour: var(--white);
+      }
+
+      .quotationMarksColour--gray {
+        --dynamic-quotes-colour: var(--gray);
+      }
+      
+
+
+      html {
+        font-family: 'Bliss 2';
+        font-size: 0.287rem;
+        font-weight: 500;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .templateVariation--a4 .fit--backPage {
+        padding: 0rem 1.15rem 1.295rem 0rem;
+      }
+
+      .templateVariation--a3 .fit--backPage {
+        padding: 0rem 1.15rem 1.22rem 0rem;
+      }
+
+      .templateVariation--a5 .fit--backPage {
+        padding: 0rem 1.21rem 1.32rem 0rem;
+      }
+
+      .templateVariation--a4-landscape .fit--backPage {
+        padding: 0rem 1.37rem 1.37rem 0rem;
+      }
+
+      .templateVariation--a3-landscape .fit--backPage {
+        padding: 0rem 1.32rem 1.32rem 0rem;
+      }
+
+      .templateVariation--a5-landscape .fit--backPage {
+        padding: 0rem 1.37rem 1.37rem 0rem;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .templateVariation--a4 .header {
+        height: 10.04rem;
+        padding: 0.765rem 5.564rem 0.765rem 0rem;
+      }
+
+      .templateVariation--a3 .header {
+        height: 10.14rem;
+        padding: 0.775rem 5.598rem 0.775rem 0rem;
+      }
+
+      .templateVariation--a5 .header {
+        height: 9.9rem;
+        padding: 0.75rem 5.5rem 0.75rem 0rem;
+      }
+
+      .templateVariation--a4-landscape .header {
+        height: 9.12rem;
+        padding: 0.765rem 13.99rem 0.765rem 0rem;
+      }
+
+      .templateVariation--a3-landscape .header {
+        height: 9.21rem;
+        padding: 0.765rem 14.16rem 0.765rem 0rem;
+      }
+
+      .templateVariation--a5-landscape .header {
+        height: 8.983rem;
+        padding: 0.7rem 13.76rem 0.74rem 0rem;
+      }
+
+      .templateVariation--a4 .header--backPage,
+      .templateVariation--a3 .header--backPage,
+      .templateVariation--a5 .header--backPage {
+        height: 4rem;
+        padding: 0;
+      }
+
+      .templateVariation--a4-landscape .header--backPage,
+      .templateVariation--a3-landscape .header--backPage,
+      .templateVariation--a5-landscape .header--backPage {
+        height: 4.37rem;
+        padding: 0;
+      }
+
+      .banner {
+        position: relative;        
+        font-family: 'Chronicle Display';
+      }
+
+      .banner--bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-colour);
+        opacity: 0.8;
+      }
+
+      .templateVariation--a4 .banner{
+        max-height: 490px;
+        padding: 0.29rem 0.2rem 0.29rem 1.21rem;
+      }
+
+      .templateVariation--a3 .banner {
+        max-height: 690px;
+        padding: 0.3rem 0.2rem 0.3rem 1.16rem;
+      }
+
+      .templateVariation--a5 .banner {
+        max-height: 350px;
+        padding: 0.29rem 0.2rem 0.29rem 1.23rem;
+      }
+
+      .templateVariation--a4-landscape .banner{
+        max-height: 370px;
+        padding: 0.63rem 0.2rem 0.68rem 1.35rem;
+      }
+
+      .templateVariation--a3-landscape .banner {
+        max-height: 545px;
+        padding: 0.66rem 0.2rem 0.68rem 1.31rem;
+      }
+
+      .templateVariation--a5-landscape .banner {
+        max-height: 270px;
+        padding: 0.64rem 0.2rem 0.64rem 1.41rem;
+      }
+
+      .banner--text {
+        position: relative;
+      }
+
+      .banner h1,
+      .banner h2 {
+        margin-bottom: 0.7em;
+        line-height: 1.13em;
+      }
+
+      .templateVariation--a4 .banner h1 {
+        font-size: 0.667rem;
+      }
+
+      .templateVariation--a3 .banner h1 {
+        font-size: 0.678rem;
+      }
+
+      .templateVariation--a5 .banner h1 {
+        font-size: 0.655rem;
+      }
+
+      .templateVariation--a4-landscape .banner h1 {
+        margin-bottom: 0.22em;
+        font-size: 0.615rem;
+        letter-spacing: -0.005em;
+      }
+
+      .templateVariation--a3-landscape .banner h1 {
+        margin-bottom: 0.25em;
+        font-size: 0.627rem;
+        letter-spacing: -0.005em;
+      }
+
+      .templateVariation--a5-landscape .banner h1 {
+        margin-bottom: 0.22em;
+        font-size: 0.61rem;
+        letter-spacing: -0.005em;
+      }
+
+      .banner h2 {
+        font-size: 0.59rem;
+      }
+
+      .templateVariation--a4-landscape .banner h2,
+      .templateVariation--a3-landscape .banner h2,
+      .templateVariation--a5-landscape .banner h2 {
+        margin-bottom: 0.22em;
+        font-size: 0.55rem;    
+      }
+
+      .banner h1:last-child,
+      .banner h2:last-child {
+        margin-bottom: 0em;
+      }
+
+      .body {
+        flex: 1;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        color: var(--gray);
+      }
+
+      .templateVariation--a4 .body {
+        padding: 0.69rem 1.1rem 0rem 1.19rem;
+      }
+
+      .templateVariation--a3 .body {
+        padding: 0.69rem 1.1rem 0rem 1.14rem;
+      }
+
+      .templateVariation--a5 .body{
+        padding: 0.67rem 1.1rem 0rem 1.23rem;
+      }
+
+      .templateVariation--a4-landscape .body,
+      .templateVariation--a3-landscape .body,
+      .templateVariation--a5-landscape .body {
+        flex-direction: row;
+      }
+
+      .templateVariation--a4-landscape .body {
+        padding: 0.91rem 4.05rem 0.9rem 1.34rem;
+      }
+
+      .templateVariation--a3-landscape .body {
+        padding: 0.96rem 4.05rem 0.9rem 1.32rem;
+      }
+
+      .templateVariation--a5-landscape .body{
+        padding: 0.93rem 4.06rem 0.9rem 1.43rem;
+      } 
+
+      .templateVariation--a4 .body--backPage,
+      .templateVariation--a3 .body--backPage,
+      .templateVariation--a5 .body--backPage,
+      .templateVariation--a4-landscape .body--backPage,
+      .templateVariation--a3-landscape .body--backPage,
+      .templateVariation--a5-landscape .body--backPage {
+        padding: 0;
+        justify-content: flex-end;
+        flex-direction: column;
+      }
+
+      .content {
+        flex: 1;
+        position: relative;
+        font-size: 0.4rem;
+      }
+
+      .content h1,
+      .content h2 {
+        font-family: 'Chronicle Display';
+      }
+
+      .templateVariation--a4 .content h1,
+      .templateVariation--a3 .content h1,
+      .templateVariation--a5 .content h1,
+      .templateVariation--a4 .content h2,
+      .templateVariation--a3 .content h2,
+      .templateVariation--a5 .content h2,
+      .templateVariation--a4 .content h3,
+      .templateVariation--a3 .content h3,
+      .templateVariation--a5 .content h3{
+        margin-bottom: 0.69em;
+        line-height: 1.22em;
+      }
+
+      .templateVariation--a4-landscape .content h1,
+      .templateVariation--a3-landscape .content h1,
+      .templateVariation--a5-landscape .content h1,
+      .templateVariation--a4-landscape .content h2,
+      .templateVariation--a3-landscape .content h2,
+      .templateVariation--a5-landscape .content h2, 
+      .templateVariation--a4-landscape .content h3,
+      .templateVariation--a3-landscape .content h3,
+      .templateVariation--a5-landscape .content h3 {
+        margin-bottom: 0.74em;
+        line-height: 1.1em;
+      }
+
+      .templateVariation--a4 .content h1 {
+        font-size: 0.513rem;
+      }
+
+      .templateVariation--a3 .content h1 {
+        font-size: 0.5213rem;
+      }
+
+      .templateVariation--a5 .content h1 {
+        font-size: 0.502rem;
+        line-height: 1.26em;
+      }
+
+      .templateVariation--a4-landscape .content h1 {
+        font-size: 0.53rem;
+      }
+
+      .templateVariation--a3-landscape .content h1 {
+        font-size: 0.54rem;
+      }
+
+      .templateVariation--a5-landscape .content h1 {
+        margin-bottom: 0.65em;
+        font-size: 0.512rem;
+        line-height: 1.16em;
+      }
+
+      .content h2 {
+        font-size: 0.48rem;
+      }
+
+      .content h3 {
+        font-size: 0.44rem;
+      }
+
+      .templateVariation--a4 .content p {
+        margin-bottom: 0.4em;
+        font-size: 0.4rem;
+      }
+
+      .templateVariation--a3 .content p {
+        margin-bottom: 0.45em;
+        font-size: 0.406rem;
+      }
+
+      .templateVariation--a5 .content p {
+        margin-bottom: 0.4em;
+        font-size: 0.387rem;
+      }
+
+      .templateVariation--a4-landscape .content p {
+        margin-bottom: 0.9em;
+        font-size: 0.387rem;
+        line-height: 1.23em;
+      }
+
+      .templateVariation--a3-landscape .content p {
+        margin-bottom: 0.95em;
+        font-size: 0.394rem;
+      }
+
+      .templateVariation--a5-landscape .content p {
+        margin-bottom: 0.95em;
+        font-size: 0.377rem;
+        line-height: 1.25em;
+      }
+
+      .content h1,
+      .content h2,
+      .content h3 {
+        font-weight: 500;
+      }
+
+      .content p {
+        font-weight: 300;
+      }
+
+      .content h1:last-child,    
+      .content h2:last-child, 
+      .content h3:last-child,    
+      .content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content strong {
+        font-weight: bold;
+      }
+
+      .content__inner {
+        line-height: 1.24em;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .footer--backPage {
+        align-items: flex-end;
+      }
+
+      .footer--frontPage {
+        height: 3.68rem;
+      }
+
+      .templateVariation--a4 .footer--frontPage {
+        padding: 0.34rem 4.1rem 1.16rem 1.19rem;
+      }
+
+      .templateVariation--a3 .footer--frontPage  {
+        padding: 0.34rem 4.15rem 1.06rem 1.14rem;
+      }
+
+      .templateVariation--a5 .footer--frontPage {
+        padding: 0.34rem 4.1rem 1.16rem 1.21rem;
+      }
+
+      .templateVariation--a4-landscape .footer--frontPage,
+      .templateVariation--a3-landscape .footer--frontPage,
+      .templateVariation--a5-landscape .footer--frontPage {
+        display: none;
+      }
+
+      .templateVariation--a4 .footer--backPage {
+        height: 1.26rem;
+        padding: 0rem 0.42rem 0rem 0.85rem;
+      }
+
+      .templateVariation--a3 .footer--backPage {
+        height: 1.28rem;
+        padding: 0rem 0.47rem 0rem 0.81rem;
+      }
+
+      .templateVariation--a5 .footer--backPage {
+        height: 1.24rem;
+        padding: 0rem 0.47rem 0rem 0.85rem;
+      } 
+
+      .templateVariation--a4-landscape .footer--backPage {
+        height: 1.8rem;
+        padding: 0rem 0.87rem 0rem 0.97rem;
+      }
+
+      .templateVariation--a3-landscape .footer--backPage {
+        height: 1.8rem;
+        padding: 0rem 1.07rem 0rem 0.97rem;
+      }
+
+      .templateVariation--a5-landscape .footer--backPage {
+        height: 1.8rem;
+        padding: 0rem 0.87rem 0rem 0.97rem;
+      } 
+
+      .templateVariation--a4 .borderTop,
+      .templateVariation--a3 .borderTop,
+      .templateVariation--a5 .borderTop {
+        border-top: 2px dotted var(--gray);
+        position: absolute;
+        left: 8.1%;
+        right: 50%;
+        top: 10.2%;
+      }
+
+      .text {
+        color: var(--gray);
+        align-self: flex-end;
+        line-height: 1.28em;
+      }
+
+      .templateVariation--a4 .text{
+        margin-bottom: 0.369rem;
+        max-height: 90px;
+        font-size: 0.34rem;
+      }
+
+      .templateVariation--a3 .text  {
+        margin-bottom: 0.42rem;
+        max-height: 140px;
+        font-size: 0.344rem;
+
+      }
+
+      .templateVariation--a5 .text {
+        margin-bottom: 0.42rem;
+        max-height: 60px;
+        font-size: 0.333rem;
+      }
+
+      .text p {
+        margin-top: 0.391em;
+      }
+
+      .text p:first-child {
+        margin-top: 0;
+      }
+
+      .text strong{
+        font-weight: bold;
+      }
+
+      .text a {
+        color: var(--shield-blue);
+      }
+
+      .logo {
+        position: relative;
+        object-fit: contain;
+      }
+      .logo--default .logo--primary {
+        display: block;
+      }
+      
+      .logo--default .logo--primary, 
+      .custom__logoLandscape,
+      .custom__logo,
+      .logo--default .logo--primaryLandscape,
+      .logo--defaultBack .logo--backPage, .custom__logoBack {
+        position: absolute;
+      }
+
+     .logo--primary,
+      .logo--primaryLandscape,
+      .logo--default .custom__logoLandscape,
+      .logo--secondaryLandscape,
+     .logo--backPage {
+        display: none;
+      }
+      .logo--defaultBack .logo--backPage {
+        display: block;
+      }
+      .custom__logo  {
+        max-width: 20%;
+      }
+      .custom__logoLandscape {
+        max-width: 10%;
+      }
+      .templateVariation--a4 .logo--primary, .templateVariation--a4 .custom__logo {
+        height: 2.5rem;
+        right: 1.16rem;
+        top: -0.02rem;
+      }
+
+      .templateVariation--a3 .logo--primary, .templateVariation--a3 .custom__logo {
+        height: 2.53rem;
+        right: 1.14rem;
+        top: 0.01rem;
+      }
+
+      .templateVariation--a5 .logo--primary, .templateVariation--a5 .custom__logo {
+        height: 2.44rem;
+        right: 1.21rem;
+        top: 0.01rem;
+      }
+
+      .templateVariation--a4-landscape .logo--primaryLandscape, .templateVariation--a4-landscape .custom__logoLandscape {
+        height: 2.4rem;
+        right: 1.37rem;
+        bottom: 1.37rem;
+
+      }
+
+      .templateVariation--a3-landscape .logo--primaryLandscape, .templateVariation--a3-landscape .custom__logoLandscape {
+        height: 2.47rem;
+        right: 1.29rem;
+        bottom: 1.33rem;
+      }
+
+      .templateVariation--a5-landscape .logo--primaryLandscape, .templateVariation--a5-landscape .custom__logoLandscape {
+        height: 2.34rem;
+        right: 1.44rem;
+        bottom: 1.41rem;
+      }
+      .templateVariation--a3-landscape .custom__logo, .templateVariation--a4-landscape .custom__logo, .templateVariation--a5-landscape .custom__logo {
+        max-width: 10%;
+      }
+      .logo--default .custom__logo{
+        display: none;
+      }
+      .logo--defaultBack .custom__logoBack{
+        display: none;
+      }
+		
+      .logo--secondary,
+      .logo--secondaryLandscape {
+        object-position: bottom;
+      }
+
+      .logo--secondary {
+        margin-left: 0.4rem;
+      }
+
+      .templateVariation--a4 .logo--secondary {
+        width: 2.12rem;
+        height: 2.12rem;   
+      }
+
+      .templateVariation--a3 .logo--secondary {
+        width: 2.18rem;
+        height: 2.18rem;
+      }
+
+      .templateVariation--a5 .logo--secondary {
+        width: 2.1rem;
+        height: 2.2rem;
+      }
+
+      .templateVariation--a4-landscape .logo--secondaryLandscape {
+        align-self: flex-end;
+        margin-bottom: 0.5rem;
+        margin-left: 1.4rem;
+        width: 2.38rem;
+        height: 2.38rem;
+      }
+
+      .templateVariation--a3-landscape .logo--secondaryLandscape {
+        align-self: flex-end;
+        margin-bottom: 0.5rem;
+        margin-left: 1.4rem;
+        width: 2.38rem;
+        height: 2.38rem;
+      }
+
+      .templateVariation--a5-landscape .logo--secondaryLandscape{
+        align-self: flex-end;
+        margin-bottom: 0.5rem;
+        margin-left: 1.4rem;
+        width: 2.38rem;
+        height: 2.38rem;
+      }
+
+      .templateVariation--a4 .logo--backPage, .templateVariation--a4 .custom__logoBack {
+        width: 2.43rem;
+        right: -0.07rem;
+        top: 0.73rem;
+      }
+
+      .templateVariation--a3 .logo--backPage, .templateVariation--a3 .custom__logoBack {
+        width: 2.45rem;
+        right: -0.07rem;
+        top: 0.71rem;
+      }
+
+      .templateVariation--a5 .logo--backPage, .templateVariation--a5 .custom__logoBack {
+        width: 2.37rem;
+        right: -0.07rem;
+        top: 0.81rem;
+      }
+
+      .templateVariation--a4-landscape .logo--backPage, .templateVariation--a4-landscape .custom__logoBack {
+        width: 2.8rem;
+        right: 0rem;
+        top: 1rem;
+      }
+
+      .templateVariation--a3-landscape .logo--backPage, .templateVariation--a3-landscape .custom__logoBack {
+        width: 2.8rem;
+        right: 0rem;
+        top: 0.9rem;
+      }
+
+      .templateVariation--a5-landscape .logo--backPage, .templateVariation--a5-landscape .custom__logoBack {
+        width: 2.8rem;
+        right: 0rem;
+        top: 0.9rem;
+      }
+
+      .logo--default .templateVariation--a4 .logo--primary,
+      .logo--default.templateVariation--a3 .logo--primary,
+      .logo--default.templateVariation--a5 .logo--primary,
+      .logo--default.templateVariation--a4-landscape .logo--primaryLandscape,
+      .logo--default.templateVariation--a3-landscape .logo--primaryLandscape,
+      .logo--default.templateVariation--a5-landscape .logo--primaryLandscape,     
+      .templateVariation--a4 .logo--secondary,
+      .templateVariation--a3 .logo--secondary,
+      .templateVariation--a5 .logo--secondary,
+      .templateVariation--a4-landscape .logo--secondaryLandscape,
+      .templateVariation--a3-landscape .logo--secondaryLandscape,
+      .templateVariation--a5-landscape .logo--secondaryLandscape,
+      .logo--defaultBack .logoVariation--reversed .logo--backPage,
+      .logo--defaultBack .logoVariation--reversedMono .logo--backPage,
+      .logo--defaultBack .logoVariation--fullColour .logo--backPage {
+        display: block;
+      }
+
+      .logoVariation--reversedMono #shield path,
+      .logoVariation--reversedMono #sun path,
+      .logoVariation--reversedMono #text path,
+      .logoVariation--reversed #shield path,
+      .logoVariation--reversed #text path {
+        fill: var(--white);
+      }
+
+      .logoVariation--reversed #sun path,
+      .logoVariation--fullColour #sun path {
+        fill: var(--yellow);
+      }
+
+      .quote {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        font-weight: 300;
+        color: var(--white);        
+      }
+
+      .quote--bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-banner-colour);
+        opacity: 0.8;
+      }
+
+      .templateVariation--a4 .quote {
+        max-height: 780px;
+        padding: 0.53rem 1rem 0.46rem 1.82rem;
+      }
+
+      .templateVariation--a3 .quote  {
+        max-height: 1100px;
+        padding: 0.62rem 1rem 0.51rem 1.79rem;
+      }
+
+      .templateVariation--a5 .quote {
+        max-height: 550px;
+        padding: 0.6rem 1rem 0.5rem 1.83rem;
+      }
+
+      .templateVariation--a4-landscape .quote {
+        max-height: 435px;
+        width: 16.7rem;
+        padding: 0.53rem 1.2rem 0.46rem 1.34rem;
+      }
+
+      .templateVariation--a3-landscape .quote {
+        max-height: 615px;
+        width: 16.75rem;
+        padding: 0.53rem 1.2rem 0.46rem 1.34rem;
+      }
+
+      .templateVariation--a5-landscape .quote {
+        max-height: 300px;
+        width: 16.8rem;
+        padding: 0.53rem 1.2rem 0.46rem 1.43rem;
+      }
+
+      .quote__text {
+        position: relative;
+      }
+
+      .toggleQuotationMarks--show .quote__text:before,
+      .toggleQuotationMarks--show .quote__text:after {
+        content: '"';
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        background-size: 70%;
+        background-position: 60%;
+        background-repeat: no-repeat;
+        color: var(--dynamic-quotes-colour);
+        font-size: 1.95rem;
+        font-family: 'Engravers MT';
+      }
+
+      .toggleQuotationMarks--show .quote__text:before {
+        transform: rotate(180deg);
+      }
+
+      .templateVariation--a4 .quote__text:before {
+        left: -1rem;
+        top: -0.62rem;
+      }
+
+      .templateVariation--a3 .quote__text:before {
+        left: -1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a5 .quote__text:before {
+        left: -1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a4-landscape .quote__text:before {
+        left: -1.1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a3-landscape .quote__text:before {
+        left: -1.1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a5-landscape .quote__text:before {
+        left: -1.1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a4 .quote__text:after {
+        right: -1.12rem;
+        bottom: -0.66rem;
+      }
+
+      .templateVariation--a3 .quote__text:after {
+        right: -1.12rem;
+        bottom: -0.66rem;
+      }
+
+      .templateVariation--a5 .quote__text:after {
+        right: -1.12rem;
+        bottom: -0.66rem;
+      }
+
+      .templateVariation--a4-landscape .quote__text:after {
+        right: -1.02rem;
+        bottom: -0.76rem;
+      }
+
+      .templateVariation--a3-landscape .quote__text:after {
+        right: -1.02rem;
+        bottom: -0.76rem;
+      }
+
+      .templateVariation--a5-landscape .quote__text:after {
+        right: -1.02rem;
+        bottom: -0.76rem;
+      }
+
+      .templateVariation--a4 .quote__text {
+        font-size: 0.453rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--a3 .quote__text {
+        font-size: 0.461rem;
+        line-height: 1.19em;
+      }
+
+      .templateVariation--a5 .quote__text {
+        font-size: 0.445rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--a4-landscape .quote__text {
+        font-size: 0.553rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--a3-landscape .quote__text {
+        font-size: 0.561rem;
+        line-height: 1.19em;
+      }
+
+      .templateVariation--a5-landscape .quote__text {
+        font-size: 0.545rem;
+        line-height: 1.18em;
+      }
+
+      .quote__text .tinymce_style--light {
+        color: var(--white);
+      }
+
+      .quote__text .tinymce_style--dark {
+        color: var(--gray);
+      }
+
+      .quote__reference  {
+        position: relative;
+      }
+
+      .templateVariation--a4 .quote__reference {
+        margin-top: 0.71em;
+        font-size: 0.44rem;
+        line-height: 1em;
+      }
+
+      .templateVariation--a3 .quote__reference {
+        margin-top: 0.71em;
+        font-size: 0.44rem;
+        line-height: 1em;
+      }
+
+      .templateVariation--a5 .quote__reference {
+        margin-top: 0.69em;
+        font-size: 0.44rem;
+        line-height: 0.9em;
+      }
+
+      .templateVariation--a4-landscape .quote__reference,
+      .templateVariation--a3-landscape .quote__reference,
+      .templateVariation--a5-landscape .quote__reference {
+        margin-top: 0.81em;
+        font-size: 0.44rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--a4 .quote__reference h1 {
+        font-size: 0.389rem;
+      }
+
+      .templateVariation--a3 .quote__reference h1 {
+        font-size: 0.396rem;
+      }
+
+      .templateVariation--a5 .quote__reference h1 {
+        font-size: 0.384rem;
+      }
+
+      .templateVariation--a4 .quote__reference h2 {
+        font-size: 0.341rem;
+      }
+
+      .templateVariation--a3 .quote__reference h2 {
+        font-size: 0.346rem;
+      }
+
+      .templateVariation--a5 .quote__reference h2 {
+        font-size: 0.336rem;
+      }
+
+      .templateVariation--a4-landscape .quote__reference h1 {
+        font-size: 0.589rem;
+      }
+
+      .templateVariation--a3-landscape .quote__reference h1 {
+        font-size: 0.596rem;
+      }
+
+      .templateVariation--a5-landscape .quote__reference h1 {
+        font-size: 0.584rem;
+      }
+
+      .templateVariation--a4-landscape .quote__reference h2 {
+        font-size: 0.541rem;
+      }
+
+      .templateVariation--a3-landscape .quote__reference h2 {
+        font-size: 0.546rem;
+      }
+
+      .templateVariation--a5-landscape .quote__reference h2 {
+        font-size: 0.536rem;
+      }
+
+      .quote__reference strong {
+        font-weight: bold;
+      }
+      .templateVariation--a4 .quote__reference--noMargin,
+      .templateVariation--a3 .quote__reference--noMargin,
+      .templateVariation--a5 .quote__reference--noMargin,
+      .templateVariation--a4-landscape .quote__reference--noMargin,
+      .templateVariation--a3-landscape .quote__reference--noMargin,
+      .templateVariation--a5-landscape .quote__reference--noMargin {
+        margin-top: 0;
+      }
+      .toggleQuotationMarks--show .quote__marks {
+        display: inline;
+      }
+
+      .toggleQuotationMarks--hide .quote__marks {
+        display: none;
+      }
+
+      .quotationMarksColour--white .quote__marks,
+      .quote__text .tinymce_style--light {
+        color: var(--white);
+      }
+
+      .quotationMarksColour--gray .quote__marks,
+      .quote__text .tinymce_style--dark {
+        color: var(--gray);
+      }
+
+      .message {
+        position: relative;
+        font-family: 'Chronicle Display';
+        font-style: italic;
+        display: none;
+        color: var(--white);
+        line-height: 1.2em;
+      }
+      
+      .logoVariation--fullColour .message {
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--a4 .message,
+      .templateVariation--a3 .message,
+      .templateVariation--a5 .message {
+        width: 6rem;
+      }
+
+      .templateVariation--a4-landscape .message,
+      .templateVariation--a3-landscape .message,
+      .templateVariation--a5-landscape .message {
+        width: 11.5rem;
+      }
+
+      .templateVariation--a4 .message {
+        font-size: 0.45rem;
+      }
+
+      .templateVariation--a3 .message  {
+        font-size: 0.457rem;
+      }
+
+      .templateVariation--a5 .message {
+        font-size: 0.45rem;
+      }
+
+      .templateVariation--a4-landscape .message {
+        font-size: 0.7rem;
+      }
+
+      .templateVariation--a3-landscape .message  {
+        font-size: 0.75rem;
+      }
+
+      .templateVariation--a5-landscape .message {
+        font-size: 0.72rem;
+      }
+
+      .brandMessage--this-is-uni .this-is-uni,
+      .brandMessage--rural-health-matter .rural-healt-matter,
+      .brandMessage--ready-today-for-tomorrow .ready-today-for-tomorrow,
+      .brandMessage--research-making-a-difference .research-making-a-difference,
+      .brandMessage--experience-has-no-substitute .experience-has-no-substitute,
+      .brandMessage--alumni-making-a-difference .alumni-making-a-difference,
+      .brandMessage--world-class-facilities .world-class-facilities,
+      .brandMessage--no-brand-message .no-brand-message {
+        display: block;
+      }
+
+      .website {
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        font-weight: bold;
+        color: var(--white);
+        line-height: 1.2em;
+      }
+      
+      .logoVariation--fullColour .website {
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--a4 .website,
+      .templateVariation--a3 .website,
+      .templateVariation--a5 .website {
+        width: 5rem;
+      }
+
+      .templateVariation--a4-landscape .website,
+      .templateVariation--a3-landscape .website,
+      .templateVariation--a5-landscape .website {
+        width: 5.5rem;
+      }
+
+      .templateVariation--a4 .website {
+        font-size: 0.35rem;
+      }
+
+      .templateVariation--a3 .website  {
+        font-size: 0.34rem;
+        line-height: 1.4em;
+      }
+
+      .templateVariation--a5 .website {
+        font-size: 0.325rem;
+        line-height: 1.5em;
+      }
+
+      .templateVariation--a4-landscape .website {
+        font-size: 0.55rem;
+      }
+
+      .templateVariation--a3-landscape .website  {
+        font-size: 0.54rem;
+      }
+
+      .templateVariation--a5-landscape .website {
+        font-size: 0.525rem;
+      }
+      
+      .quotationMarksColour--white .quote__text {
+        color: var(--white);
+      }
+      
+      .quotationMarksColour--gray .quote__text {
+        color: var(--gray);
+      }
+      
+      .quotationMarksColour--white .quote__reference {
+        color: var(--white);
+      }
+      
+      .quotationMarksColour--gray .quote__reference {
+        color: var(--gray);
+      }
+
+      .cricos__container {
+        position: absolute;
+        transform: rotate(270deg);
+        text-transform: uppercase;
+        transform-origin: left bottom;
+        white-space: nowrap;
+        color: var(--dynamic-text-colour);
+        font-weight: bold;
+      }
+
+      .templateVariation--a4 .cricos__container, 
+      .templateVariation--a3 .cricos__container,
+      .templateVariation--a5 .cricos__container {
+        bottom: 2.6rem;
+        right: -1.8rem;
+      }
+      
+      .templateVariation--a4-landscape .cricos__container, 
+      .templateVariation--a3-landscape .cricos__container,
+      .templateVariation--a5-landscape .cricos__container {
+        bottom: 3.1rem;
+        right: -1.8rem;
+      }
+
+      .cricos,
+      .exportId {
+        font-size: 0.15rem;
+      }
+
+      .textColour--orange .cricos,
+      .textColour--orange .exportId,
+      .textColour--red .cricos,
+      .textColour--red .exportId,
+      .textColour--blue .cricos,
+      .textColour--blue .exportId,
+      .textColour--green .cricos,
+      .textColour--green .exportId,
+      .cricos--primary,
+      .exportId--primary {
+        color: var(--gray);
+      }
+
+      /* Back Page Toggle */
+      .toggleSideBack--show .page--back {
+        display: block;
+      }
+
+      .toggleSideBack--hide .page--back {
+        display: none;
+      }
+
+      .u-hide { display: none; }
+
+      .templateVariation--a4 .quote__reference.u-hide,
+      .templateVariation--a3 .quote__reference.u-hide,
+      .templateVariation--a5 .quote__reference.u-hide {
+        display: none;
+      }
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{ placeholder-image-2 }}
+  {{JCU_template-variation--fp}}
+  {{{JCU_background-image--fp}}}
+  {{JCU_theme-colour--fp}}
+  {{{JCU_banner-text--fp}}}
+  {{{JCU_body-text--fp}}}
+  {{{JCU_footer-text--fp}}}
+  {{{JCU_secondary-logo--fp}}}
+  {{JCU_toggle-side-back--fp}}
+  {{{JCU_background-image-back-page--fp}}}
+  {{JCU_banner-colour--fp}}
+  {{JCU_logo-variation--fp}}
+  {{{JCU_quote-text--fp}}}
+  {{JCU_toggle-quotation-marks--fp}}
+  {{JCU_quotation-marks-colour--fp}}
+  {{{JCU_quote-reference--fp}}}
+  {{JCU_text-colour--fp}}
+  {{JCU_brand-message--fp}}
+  {{{JCU_free-text-message--fp}}}
+  {{{JCU_website--fp}}}
+-->   
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{JCU_template-variation--fp}}{{^JCU_template-variation--fp}}primary{{/JCU_template-variation--fp}}
+                                         themeColour--{{JCU_theme-colour--fp}}{{^JCU_theme-colour--fp}}green{{/JCU_theme-colour--fp}}
+                                         textColour--{{JCU_text-colour--fp}}{{^JCU_text-colour--fp}}orange{{/JCU_text-colour--fp}}
+                                         logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                                         logo--{{^JCU-custom-logoBack}}defaultBack{{/JCU-custom-logoBack}}
+                                         logoVariation--{{JCU_logo-variation--fp}}{{^JCU_logo-variation--fp}}fullColour{{/JCU_logo-variation--fp}}
+                                         toggleSideBack--{{JCU_toggle-side-back--fp}}{{^JCU_toggle-side-back--fp}}show{{/JCU_toggle-side-back--fp}}
+                                         bannerColour--{{JCU_banner-colour--fp}}{{^JCU_banner-colour--fp}}orange{{/JCU_banner-colour--fp}}
+                                         brandMessage--{{JCU_brand-message--fp}}{{^JCU_brand-message--fp}}this-is-uni{{/JCU_brand-message--fp}}
+                                         toggleQuotationMarks--{{JCU_toggle-quotation-marks--fp}}{{^JCU_toggle-quotation-marks--fp}}show{{/JCU_toggle-quotation-marks--fp}}
+                                         quotationMarksColour--{{JCU_quotation-marks-colour--fp}}{{^JCU_quotation-marks-colour--fp}}white{{/JCU_quotation-marks-colour--fp}}" 
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--frontPage">
+          <div class="header">
+            <div class="backgroundImage backgroundImage--frontPage"><div class="reposition-fix">{{{JCU_background-image--fp}}}</div></div> <!--backgroundImage--frontPage-->
+            {{#JCU_banner-text--fp}}
+            <div class="banner u-heading-patch" data-max-height="css">
+              <div class="banner--bg"></div> <!--banner--bg-->
+              <div class="banner--text">{{{JCU_banner-text--fp}}}</div> <!--banner--text"-->
+            </div> <!--banner-->
+            {{/JCU_banner-text--fp}}
+          </div> <!--header-->
+          <div class="body">
+            {{#JCU_body-text--fp}}
+            <div class="content">
+              <div class="content__inner u-heading-patch" data-max-height="dynamic">{{{JCU_body-text--fp}}}</div> <!--content__inner-->
+            </div> <!--content-->
+            {{/JCU_body-text--fp}}
+            {{#JCU_secondary-logo--fp}}
+            <img class="logo logo--secondaryLandscape" src="{{{JCU_secondary-logo--fp}}}"><!--logo--secondary-->
+            {{/JCU_secondary-logo--fp}}
+            <img class="logo logo--primaryLandscape" src="https://files.outfit.io/media_library_items/110752/JCU-Logo---Vertical-RGB.png">
+            <img class="logo custom__logoLandscape" src="{{{JCU-custom-logo}}}" /><!--logo--primary-->
+          </div> <!--body-->
+          <div class="footer footer--frontPage">
+            <div class="borderTop"></div> <!--borderTop-->
+            {{#JCU_footer-text--fp}}
+            <div class="text" data-max-height="css">{{{JCU_footer-text--fp}}}</div> <!--text-->
+            {{/JCU_footer-text--fp}}
+            {{#JCU_secondary-logo--fp}}
+            <img class="logo logo--secondary" src="{{{JCU_secondary-logo--fp}}}"><!--logo--secondary-->
+            {{/JCU_secondary-logo--fp}}
+            <img class="logo logo--primary" src="https://files.outfit.io/media_library_items/110752/JCU-Logo---Vertical-RGB.png">
+            <img class="custom__logo" src="{{{JCU-custom-logo}}}" /><<!--logo--primary-->
+          </div> <!--footer-->
+          <div class="cricos__container">
+            <div class="cricos cricos--primary">{{{account.snippets.jcu-cricos}}}</div> <!--cricos-->
+            <div><p class="exportId exportId--primary">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE</p>{{/metadata}}</div>
+          </div>  <!--cricos__container-->  
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <div class="page page--back">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPage">
+          <div class="backgroundImage backgroundImage--backPage"><div class="reposition-fix">{{{JCU_background-image-back-page--fp}}}</div></div> <!--backgroundImage--back-->
+          <div class="header header--backPage">
+            <div class="logo logo--backPage">{{{account.snippets.vertical-logo}}}</div> 
+            <img class="custom__logoBack" src="{{{JCU-custom-logoBack}}}" />
+            <!--logo--backPage-->
+          </div> <!--header--back-->
+          <div class="body body--backPage">
+            <div class="quote u-heading-patch" data-max-height="css">         
+              <div class="quote--bg"></div> <!--quote--bg-->
+              {{#JCU_quote-text--fp}}
+              <div class="quote__text">{{{JCU_quote-text--fp}}}</div> <!--quote__text-->
+              {{/JCU_quote-text--fp}}
+              {{#JCU_quote-reference--fp}}
+              <div class="quote__reference u-heading-patch {{^JCU_quote-text--fp}}quote__reference--noMargin{{/JCU_quote-text--fp}}">{{{JCU_quote-reference--fp}}}</div> <!--quote__reference-->
+              {{/JCU_quote-reference--fp}}
+            </div> <!--quote-->
+          </div> <!--body--backPage-->
+          <div class="footer footer--backPage">
+            <div class="message__container">
+              <div class="message this-is-uni">This is Uni... but not as you know it</div>
+              <div class="message rural-healt-matter">Rural Health Matter</div>
+              <div class="message ready-today-for-tomorrow">Ready Today for Tomorrow</div>
+              <div class="message research-making-a-difference">Research Making a Difference</div>
+              <div class="message experience-has-no-substitute">Experience has no Substitute</div>
+              <div class="message alumni-making-a-difference">Alumni Making a Difference</div>
+              <div class="message world-class-facilities">World-Class Facilities</div>
+              <div class="message no-brand-message" data-max-line="1">{{{JCU_free-text-message--fp}}}</div>
+            </div> <!--message__container-->
+            {{#JCU_website--fp}}
+            <div class="website" data-max-line="1">{{{JCU_website--fp}}}</div> <!--webisite-->
+            {{/JCU_website--fp}}
+          </div> <!--footer--backPage-->
+          <div class="cricos__container">
+            <div class="cricos">{{{account.snippets.jcu-cricos}}}</div> <!--cricos-->
+            <div><p class="exportId">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE</p>{{/metadata}}</div>
+          </div>  <!--cricos__container-->  
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
