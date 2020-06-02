@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html data-sign="OSM" async>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Engravers%20MT/stylesheet.css');
+
+      :root {
+        --shield-blue: {{{account.colors.primary}}};
+        --grey: {{{account.colors.grey}}};
+        --yellow: #EBB103;
+        --black: #000;
+        --white: #fff;
+
+        --omega-blue: {{{account.colors.midnight-blue-omega}}};
+        --omega-green:  {{{account.colors.dark-green-omega}}};
+        --omega-orange: {{{account.colors.dark-orange-omega}}};
+        --omega-red: {{{account.colors.dark-red-omega}}};
+
+        --gamma-blue: {{{account.colors.mid-blue-gamma}}};
+        --gamma-green:  {{{account.colors.bright-green-gamma}}};
+        --gamma-orange: {{{account.colors.bright-orange-gamma}}};
+        --gamma-red: {{{account.colors.bright-red-gamma}}};
+
+        --delta-blue: {{{account.colors.dark-blue-delta}}};
+        --delta-green:  {{{account.colors.mid-green-delta}}};
+        --delta-orange: {{{account.colors.mid-orange-delta}}};
+        --delta-red: {{{account.colors.mid-red-delta}}};
+
+        --beta-blue: {{{account.colors.bright-blue-beta}}};
+        --beta-green: {{{account.colors.light-emerald-beta}}};
+        --beta-orange: {{{account.colors.light-peach-beta}}};
+        --beta-red: {{{account.colors.magenta-beta}}};
+      }
+
+      .themeColour--blue {
+        --dynamic-colour-delta: var(--delta-blue);
+        --dynamic-colour-omega: var(--omega-blue);
+        --dynamic-colour-beta: var(--beta-blue);
+        --dynamic-colour-gamma: var(--gamma-blue);
+      }
+
+      .themeColour--green  {
+        --dynamic-colour-delta: var(--delta-green);
+        --dynamic-colour-omega: var(--omega-green);
+        --dynamic-colour-beta: var(--beta-green);
+        --dynamic-colour-gamma: var(--gamma-green);
+      }
+
+      .themeColour--orange {
+        --dynamic-colour-delta: var(--delta-orange);
+        --dynamic-colour-omega: var(--omega-orange);
+        --dynamic-colour-beta: var(--beta-orange);
+        --dynamic-colour-gamma: var(--gamma-orange);
+      }
+
+      .themeColour--red {
+        --dynamic-colour-delta: var(--delta-red);
+        --dynamic-colour-omega: var(--omega-red);
+        --dynamic-colour-beta: var(--beta-red);
+        --dynamic-colour-gamma: var(--gamma-red);
+      }
+
+      .coverTextColour--white {
+        --dynamic-cover-colour: var(--white);
+      }
+
+      .coverTextColour--black {
+        --dynamic-cover-colour: var(--grey);
+      }
+
+      .footerTextColour--blue {
+        --dynamic-footer-colour: var(--delta-blue);
+      }
+      .footerTextColour--green {
+        --dynamic-footer-colour: var(--delta-green);
+      }
+      .footerTextColour--orange {
+        --dynamic-footer-colour: var(--delta-orange);
+      }
+      .footerTextColour--red {
+        --dynamic-footer-colour: var(--delta-red);
+      }
+
+      .footerTextColour--white {
+        --dynamic-footer-colour: var(--white);
+      }
+
+      .footerTextColour--black {
+        --dynamic-footer-colour: var(--black);
+      }
+
+      .bannerColour--blue {
+        --dynamic-quote-banner-colour: var(--omega-blue);
+      }
+      .bannerColour--green {
+        --dynamic-quote-banner-colour: var(--omega-green);
+      }
+      .bannerColour--orange {
+        --dynamic-quote-banner-colour: var(--omega-orange);
+      }
+      .bannerColour--red {
+        --dynamic-quote-banner-colour: var(--omega-red);
+      }
+
+      html {
+        font-family: 'Bliss 2';
+        font-size: 11pt;
+        color: var(--grey);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+
+      ul {
+        margin-bottom: 0.23rem;
+      }
+
+      li {
+        position: relative;
+        margin-bottom: 0;
+        padding-left: 7pt;
+        font-family: 'Bliss 2';
+        font-size: 0.24rem;
+        line-height: 1.2;
+      }
+
+      li:last-child {
+        margin-bottom: 0;
+      }
+
+      li:before  {
+        content: '\2022';
+        position: absolute;
+        top: 1pt;
+        left: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .container--inner2 {
+        padding: 68.7pt 35pt 25pt 35pt;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+      }
+
+      .header--inner3 {
+        position: relative;
+        display: inline-block;
+        padding: 0.88rem 0.47rem 0.89rem 0rem;
+      }
+
+      /*.header--threeCourses {
+        height: 6.73rem;
+      }*/
+      
+      .headerHeight--small .header--threeCourses {
+        height: 2.73rem;
+      } 
+      
+      .headerHeight--medium .header--threeCourses {
+        height: 4.73rem;
+      } 
+      
+      .headerHeight--large .header--threeCourses {
+        height: 6.73rem;
+      } 
+      
+      .headerHeight--extra-large .header--threeCourses {
+        height: 10.03rem;
+      } 
+
+      .header--inner4 {
+        justify-content: flex-end;
+        flex-shrink: 0;
+        padding: 0.75rem 1.12rem 1.05rem 0rem;
+        height: 6.12rem;
+      }
+
+      .header--cover {
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 108pt;
+        padding: 12pt 36pt 21pt 47pt;
+
+      }
+
+      .header--backCover {
+        justify-content: flex-end;
+        height: 189pt;
+        padding: 38pt 46pt 0pt 47pt;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .body--inner1 {
+        justify-content: space-between;
+        flex: 1 0 0%;
+        padding: 75pt 0pt 36pt 0pt;
+      }
+
+      .body--inner3 {
+        flex-direction: row;
+        flex: 1 0 0%;
+        overflow: hidden;
+      }
+
+      .body--threeCourses {
+        margin-left: -0.7rem;
+        padding: 0.42rem 1rem 0.4rem 1rem;
+      }
+
+      .body--twoCourses {
+        margin-left: -0.7rem;
+        padding: 0.42rem 0.84rem 0.2rem 0.84rem;
+      }
+
+      .body--oneCourses {
+        padding: 0.40rem 1.28rem 0.33rem 0.89rem;
+      }
+
+      .body--inner4 {
+        flex: 1 0 0%;
+        justify-content: flex-end;
+        padding: 0.72rem 1.17rem 0.77rem 0.58rem;
+      }
+
+      .body--backCover {
+        justify-content: flex-end;
+        flex: 1 0 0%;
+        margin-bottom: 47pt;
+        padding: 0 87pt;
+      }
+
+      .banner__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--dynamic-colour-delta);
+        opacity: 0.8;
+      }
+
+      .banner__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+      }
+
+      .banner__wrapper {
+        position: relative;
+        width: 54.5%;
+      }
+
+      .banner {
+        position: relative;
+        padding: 0.25rem 0.36rem 0.28rem 1rem;
+      }
+
+      .banner h1 {
+        margin-bottom: 0.14rem;
+        font-family: 'Chronicle Display';
+        font-size: 0.67rem;
+        color: var(--white);
+        line-height: 1.2em;
+      }
+
+      .banner h2 {
+        margin-bottom: 0.13rem;
+        font-family: 'Chronicle Display';
+        font-size: 0.6rem;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .banner h3 {
+        margin-bottom: 0.09rem;
+        font-family: 'Bliss 2';
+        font-size: 0.28rem;
+        font-weight: 300;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .banner p {
+        margin-bottom: 0.23rem;
+        font-family: 'Bliss 2';
+        font-size: 0.24rem;
+        line-height: 1.2em;
+        font-weight: 300;
+        color: var(--white);
+      }
+
+      .banner h1:last-child,
+      .banner h2:last-child,
+      .banner h3:last-child,
+      .banner p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content {
+        position: relative;
+        font-size: 20pt;
+      }
+
+      .content--oneCourse {
+        flex: 1 0 0%;
+        padding-right: 0.35rem;
+      }
+
+      .content__title {
+        font-family: 'Bliss 2';
+        font-size: 12pt;
+        font-weight: bold;
+        line-height: 1.2em;
+        color: var(--white);
+        text-transform: uppercase;
+      }
+
+      .content__wrapper {
+        position: relative;
+      }
+
+      .content__release {
+        position: absolute!important;
+        left: -32pt;
+        width: 97pt;
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        font-family: 'Bliss 2';
+        font-size: 25pt;
+        font-weight: 300;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .content__text {
+        margin-top: 8pt;
+        font-family: 'Chronicle Display';
+        color: var(--white);   
+      }
+
+      .content__text h1 {
+        margin-bottom: 0.2em;
+        font-size: 29.4pt;
+        font-weight: 300;
+        line-height: 1.05em;
+      }
+
+      .content__text h2 {
+        margin-bottom: 0.2em;
+        font-size: 27pt;
+        line-height: 1.05em;
+      }
+
+      .content__text h3 {
+        margin-bottom: 0.2em;
+        font-size: 16pt;
+        line-height: 1.05em;
+      }
+
+      .content__text h4 {
+        margin-bottom: 0.2em;
+        font-size: 14pt;
+        line-height: 1.05em;
+      }
+
+      .content__text h1,
+      .content__text h2,
+      .content__text h3,
+      .content__text h4 {
+        margin-bottom: 0;
+      }
+
+      .image__container {
+        display: grid;
+        width: 4.9rem;
+      }
+
+      .image {
+        position: relative;
+      }
+
+      .image__container--1 {
+        height: 7.19rem;
+      }
+
+      .image__container--2 {
+        grid-template-rows: 3.6rem 3.6rem;
+        grid-gap: 0.42rem;
+      }
+
+      .image__container--3 {
+        grid-template-rows: 2.50rem 4.67rem;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 0.42rem 0.26rem;
+      }
+
+      .image__container--3 .image:nth-child(3) {
+        grid-column: span 2;
+      }
+
+      .image__container--4  {
+        grid-template-rows: 2.34rem 2.34rem;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 0.42rem 0.28rem;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0%;
+      }
+
+      .column--threeCourses {
+        margin-left: 0.7rem;
+        font-size: 0.47rem;
+      }
+
+      .column--twoCourses {
+        margin-left: 0.70rem;
+        font-size: 0.47rem;
+      }
+
+
+
+      .text h1 {
+        font-family: 'Bliss 2';
+        font-weight: bold;
+        letter-spacing: -0.1pt;
+        line-height: 1.25em;
+        color: var(--dynamic-colour-gamma);
+      }
+
+      .text--threeCourses h1 {
+        margin-bottom: 0.17rem;
+        font-size: 0.318rem;
+      }
+
+      .text--twoCourses h1 {
+        margin-bottom: 0.16rem;
+        font-size: 0.325rem;
+      }
+
+      .text--oneCourse h1 {
+        margin-bottom: 0.04rem;
+        font-size: 0.32rem;
+      }
+
+      .text h2 {
+        font-family: 'Bliss 2';
+        font-weight: bold;
+        color: var(--grey);
+        line-height: 1.25em;
+      }
+
+      .text--threeCourses h2 {
+        margin-bottom: 0.16rem;
+        font-size: 0.28rem;
+      }
+
+      .text--oneCourse h2 {
+        margin-bottom: 0.05rem;
+        font-size: 0.28rem;
+      }
+
+      .text p {
+        font-family: 'Bliss 2';
+        line-height: 1.25em;
+        font-weight: 300;
+      }
+
+      .text--oneCourse p,
+      .text--twoCourses p,
+      .text--threeCourses p {
+        margin-bottom: 0.15rem;
+        font-size: 0.236rem;
+      }
+
+      .is-export-mode .text--twoCourses p {
+        font-size: 0.236rem;
+      }
+
+      .text--oneCourse p strong,
+      .text--twoCourses p strong,
+      .text--threeCourses p strong {
+        color: var(--dynamic-colour-delta);
+      }
+
+      .text--twoCourses p {
+        margin-bottom: 0.18rem;
+        font-size: 0.24rem;
+      }
+
+      .is-export-mode .text--twoCourses p { 
+        font-size: 0.23rem;
+      }
+
+      .text--oneCourse p {
+        margin-bottom: 0.23rem;
+        font-size: 0.24rem;
+        line-height: 1.2em;
+      }
+
+      .is-export-mode .text--oneCourse p {
+        font-size: 0.23rem;
+      }
+
+      .text h1:last-child,
+      .text h2:last-child,
+      .text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .details {
+        margin-bottom: 0.05rem;
+        font-family: 'Bliss 2';
+        font-size: 0.24rem;
+        line-height: 1.3em;
+        font-weight: 300;
+      }
+
+      .details__label {
+        font-size: 0.24rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--dynamic-colour-delta);
+      }
+
+      .contentBlock__container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .contentBlock { 
+        display: flex;
+        flex: 1 0 0%;
+        margin-bottom: 25pt;
+        padding-bottom: 22pt;
+        border-bottom: 1pt dotted var(--dynamic-colour-beta);
+      }
+
+      .contentBlock:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .contentBlock__image {
+        position: relative;
+        height: 223pt;
+        width: 255pt;
+
+      }
+
+      .contentBlock__image--alt {
+        height: 212pt;
+        margin-bottom: 11.8pt;
+      }
+
+      .contentBlock__wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .contentBlock__image + .contentBlock__wrapper {
+        margin-left: 17pt;
+      }
+
+      .contentBlock__text {
+        flex: 1 0 0%;
+      }
+
+      .contentBlock__text--alt {
+        column-count: 2;
+        column-gap: 13.4pt;
+      }
+
+      .contentBlock__text h1 {
+        margin-bottom: 10.9pt;
+        font-family: 'Chronicle Display';
+        font-size: 22pt;
+        line-height: 1.15em;
+        color: var(--dynamic-colour-omega);
+      }
+
+      .contentBlock__text h2 {
+        margin-bottom: 11pt;
+        font-family: 'Bliss 2';
+        font-weight: 300;
+        font-size: 16pt;
+        line-height: 1.2em;
+        color: var(--dynamic-colour-beta);
+      }
+
+      .contentBlock__text h3 {
+        margin-bottom: 11.6pt;
+        font-family: 'Bliss 2';
+        font-weight: 300;
+        font-size: 14pt;
+        line-height: 1.15em;
+        letter-spacing: -0.35pt;
+        color: var(--dynamic-colour-beta);
+      }
+
+      .contentBlock__text p {
+        margin-bottom: 10pt;
+        font-family: 'Bliss 2';
+        font-weight: 300;
+        font-size: 8.5pt;
+        line-height: 1.25em;
+        letter-spacing: -0.2pt;
+      }
+
+      .contentBlock__text ul {
+        margin-bottom: 8pt;
+      }
+
+      .contentBlock__text p + ul {
+        margin-top: -7pt;
+      }
+
+      .contentBlock__text h1:last-child,
+      .contentBlock__text h2:last-child,
+      .contentBlock__text h3:last-child,
+      .contentBlock__text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .contentBlock__terms {
+        margin-top: 12pt;
+        font-family: 'Bliss 2';
+        font-size: 6pt;
+        line-height: 1.2em;
+      }
+
+      .contentBlock__text li {
+        position: relative;
+        margin-bottom: 4pt;
+        padding-left: 7pt;
+        font-family: 'Bliss 2';
+        font-size: 8.5pt;
+        line-height: 1.2em;
+      }
+
+      .contentBlock__text li:last-child {
+        margin-bottom: 0;
+      }
+
+      .contentBlock__text li:before  {
+        content: '\2022';
+        position: absolute;
+        top: 1pt;
+        left: 0;
+      }
+
+      .quote__container {
+        display: flex;
+        flex: 1 0 0%;
+        flex-direction: column;       
+        margin-left: 10pt;
+      }
+
+      .contentBlock  + .quote__container {
+        margin-left: 17pt;
+      }
+
+      .quote h1 {
+        margin-bottom: 9pt;
+        font-family: 'Chronicle Display';
+        font-size: 15pt;
+        line-height: 1.2em;
+        letter-spacing: -0.4pt;
+        color: var(--dynamic-colour-beta);
+      }
+
+      .quote h2 {
+        margin-bottom: 3pt;
+        font-family: 'Bliss 2';
+        font-size: 12pt;
+        line-height: 1.2em;
+      }
+
+      .quote h3 {
+        margin-bottom: 2pt;
+        font-family: 'Bliss 2';
+        font-size: 10pt;
+        line-height: 1.2em;
+      }
+
+      .quote p {
+        margin-bottom: 2pt;
+        font-family: 'Bliss 2';
+        font-size: 8.5pt;
+        line-height: 1.2em;
+      }
+
+      .endMark {
+        width: 15pt;
+        height: 15pt;
+        margin-top: 6pt;
+        background: var(--dynamic-colour-beta);
+        border-radius: 0% 0% 100% 0%;
+      }
+
+      .toogleEndMark--hide .endMark{
+        display: none;
+      }
+
+      .logo__container {
+        position: relative;
+        height: 1.33rem
+      }
+
+      .default .logo {
+        position: relative;
+        width: 106pt;
+      }
+      .default .coverLogo {
+        display: none;
+      }
+      .coverLogo {
+        position: relative;
+        width: 106pt;
+      }
+      .default .logoBackPage {
+        display: none;
+      }
+      .logoBackPage {
+        position: relative;
+        width: 108pt;
+      }
+      .logo--default .footer__custom__logo {
+        display: none;
+      }
+      .footer__custom__logo {
+        padding-bottom: 0.9rem;
+        width: 2.43rem;
+        font-size: 0;
+        margin-right: 1.15rem;
+      }
+      .logo--inner4 {
+        display: none;
+      }
+      .logo--default .logo--inner4 {
+        display: block;
+      }
+
+      .logoGlobal--reversed-mono .logo--global #shield path,
+      .logoGlobal--reversed-mono .logo--global #sun path,
+      .logoGlobal--reversed-mono .logo--global #text path,
+      .logoGlobal--reversed .logo--global #shield path,
+      .logoGlobal--reversed .logo--global #text path {
+        fill: var(--white);
+      }
+
+      .logoGlobal--reversed .logo--global #sun path,
+      .logoGlobal--full-colour .logo--global #sun path {
+        fill: var(--yellow);
+      }
+
+      .logoGlobal--full-colour .logo--global #shield path {
+        fill: var(--shield-blue);
+      }
+
+      .logoGlobal--full-colour .logo--global #text path {
+        fill: var(--grey);
+      }
+
+      .logo--reversed-mono .logo--inner #sun path,
+      .logo--reversed-mono .logo--inner #shield path,
+      .logo--reversed-mono .logo--inner #text path,    
+      .logo--reversed .logo--inner #text path,
+      .logo--reversed .logo--inner #shield path {
+        fill: var(--white);
+      }
+
+      .logo--reversed .logo--inner #sun path {
+        fill: var(--yellow);
+      }
+
+
+      .logo--full-colour .logo--inner #shield path {
+        fill: var(--shield-blue);
+      }
+
+      .logo--full-colour .logo--inner #text path {
+        fill: var(--grey);
+      }
+
+      .logo--default .logo--inner4 {
+        width: 2.43rem;
+      }
+
+      .default .logo--backCover {
+        width: 108pt;
+      }
+
+      .heading__wrapper {
+        position: relative;
+        margin-right: 131pt;
+        padding: 18pt 21pt 19pt 65pt;
+      }
+
+      .heading {
+        position: relative;
+        max-height: 140pt;
+      }
+
+      .heading h1 {
+        margin-bottom: 3pt;
+        font-family: 'Chronicle Display';
+        font-size: 22pt;
+        line-height: 1.2em;
+        letter-spacing: -0.2pt;
+        color: var(--white);
+      }
+
+      .heading h2 {
+        margin-bottom: 3pt;
+        font-family: 'Chronicle Display';
+        font-size: 20pt;
+        line-height: 1.2em;
+        letter-spacing: -0.2pt;
+        color: var(--white);
+      }
+
+      .heading h3 {
+        margin-bottom: 3pt;
+        font-family: 'Bliss 2';
+        font-size: 16.1pt;
+        line-height: 1.2em;
+        letter-spacing: -0.4pt;
+        color: var(--white);
+      }
+
+      .heading h4 {
+        margin-bottom: 2pt;
+        font-family: 'Bliss 2';
+        font-size: 14pt;
+        line-height: 1.2em;
+        letter-spacing: -0.4pt;
+        color: var(--white);
+      }
+
+      .heading h5 {
+        margin-bottom: 2pt;
+        font-family: 'Bliss 2';
+        font-size: 12pt;
+        line-height: 1.2em;
+        letter-spacing: -0.4pt;
+        font-weight: 300;
+        color: var(--white);
+      }
+
+      .heading p {
+        font-family: 'Bliss 2';
+        font-size: 11pt;
+        color: var(--white);
+        letter-spacing: -0.3pt;
+        line-height: 1.2em;
+        font-weight: 300;
+        color: var(--white);
+      }
+
+      .heading h1 + p {
+        margin-top: 19pt;
+      }
+
+      .heading h2 + p {
+        margin-top: 18pt;
+      }
+
+      .heading h3 + p {
+        margin-top: 17pt;
+      }
+
+      .heading h4 + p {
+        margin-top: 14pt;
+      }
+
+      .heading h5 + p {
+        margin-top: 12pt;
+      }
+
+      .centreBlock {
+        display: flex;
+        flex: 1 0 0%;
+        padding: 0pt 66pt;
+        align-items: flex-end;
+      }
+
+      .centreBlock__text {
+        margin-right: 13pt;
+        position: relative;
+        padding-bottom: 14pt;
+        font-size: 14pt;
+      }
+
+      .centreBlock__text h1 {
+        margin-bottom: 3pt;
+        font-size: 14.2pt;
+        color: var(--white);
+        line-height: 1.2em;
+      }
+
+      .centreBlock__text h2 {
+        margin-bottom: 4pt;
+        font-size: 12pt;
+        color: var(--white);
+        line-height: 1.2em;
+        font-weight: 300;
+        letter-spacing: -0.15pt;
+      }
+
+      .centreBlock__text p {
+        font-size: 10pt;
+        color: var(--white);
+      }
+
+      .centreBlock ul {
+        position: relative;
+        list-style: none;
+      }
+
+      .centreBlock li {
+        position: relative;
+        margin-bottom: 3.4pt;
+        padding-left: 7.7pt;
+        font-size: 12pt;
+        color: var(--white);
+        line-height: 1.25em;
+        font-weight: 300;
+        letter-spacing: -0.1pt;
+      }
+
+      .centreBlock li:last-child {
+        margin-bottom: 0;
+      }
+
+      .centreBlock li:before {
+        content: '\2022';
+        position: absolute;
+        top: 1pt;
+        left: 0;
+        width: 2pt;
+        height: 2pt;
+        border-radius: 50%;
+      }
+
+      .centreBlock__image {
+        position: relative;
+        width: 140pt;
+        height: 125pt;
+      }
+
+      .quote {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        padding: 0.65rem 1rem 0.49rem 1.26rem;
+        font-weight: 300;
+      }
+
+      .quote--alt {
+        margin-top: -1.5pt;
+        padding: 0;
+      }
+
+      .quoteTextColour--light .quote {
+        color: var(--white);
+      }
+
+      .quoteTextColour--dark .quote {
+        color: var(--grey);
+      }
+
+      .quote__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-quote-banner-colour);
+        opacity: 0.8;
+      }
+
+      .quote__text {
+        position: relative;
+        margin-bottom: 0.28rem;
+        font-size: 0.45rem;
+        font-family: 'Bliss 2';
+        line-height: 1.2em;
+      }
+
+      .quote__text:before,
+      .quote__text:after {
+        content: '"';
+        position: absolute;
+        background-position: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        font-family: 'Engravers MT';
+        font-size: 1.85rem;
+      }
+
+      .quote__text:before {
+        left: -1.03rem;
+        top: -0.77rem;
+        transform: rotate(180deg);
+      }
+
+      .quote__text:after {
+        right: -0.63rem;
+        bottom: -0.54rem;
+      }
+
+      .quote__reference {
+        position: relative;
+      }
+
+      .quote__reference h1 {
+        margin-bottom: 0.23rem;
+        font-family: 'Bliss 2';
+        font-size: 0.42rem;
+        font-weight: 300;
+      }
+
+      .quote__reference p {
+        margin-bottom: 0.19rem;
+        font-family: 'Bliss 2';
+        font-size: 0.37rem;
+        font-weight: 300;
+      }
+
+      .quote__reference h1,
+      .quote__reference p {
+        margin-bottom: 0;
+      }
+
+      .toggleQuotationMarks--hide .quote__text:before,
+      .toggleQuotationMarks--hide .quote__text:after {
+        display: none;
+      }
+
+      .message--inner4 {
+        color: var(--dynamic-footer-colour);
+      }
+
+      .website--inner4 {
+        color: var(--dynamic-footer-colour);
+      }
+
+      .blurb {
+        color: var(--dynamic-cover-colour);
+      }
+
+      .blurb h1 {
+        margin-bottom: 0.75em;
+        font-size: 17.2pt;
+        line-height: 1.2em;
+      }
+
+      .blurb h2 {
+        margin-bottom: 0.75em;
+        font-size: 13.5pt;
+        line-height: 1.25em;
+      }
+
+      .blurb p {
+        margin-bottom: 10pt;
+        font-size: 9.3pt;
+        line-height: 1.25em;
+        letter-spacing: -0.47pt;
+      }
+
+      .blurb p:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0pt 37pt 34pt 37pt;
+      }
+
+      .footer--inner1 {
+        background: var(--white);
+        height: 242pt;
+        padding: 27pt 33pt 52pt 55pt;
+        align-items: flex-start;
+      }
+
+      .footer--inner3 {
+        justify-content: flex-end;
+        padding: 0;
+      }
+
+      .footer--inner4 {
+        padding: 0rem 1.71rem 1.26rem 0.84rem;
+      }
+
+      .footer--backCover {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0pt 55pt 27pt 87pt;
+      }
+
+      .footerText__container {
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .footerText__logo {
+        width: 70pt;
+        display: none;
+      }
+
+      .coverTextColour--white .footerText__logo--primary {
+        display: block;
+      }
+
+      .coverTextColour--black .footerText__logo--secondary {
+        display: block;
+      }
+
+      .footerText {
+        margin-left: 16pt;
+        font-size: 11.3pt;
+        font-style: italic;
+        font-weight: bold;
+        line-height: 1.2em;
+        letter-spacing: -0.65pt;
+        color: var(--dynamic-cover-colour);
+      }
+
+      .footer__content {
+        display: flex;
+        flex: 1 0 0%;
+        padding-right: 0.93rem;
+        font-family: 'Bliss 2';
+        font-weight: 300;
+      }
+
+      .footer__content--horizontal {
+        padding-left: 1rem;
+        padding-bottom: 0.9rem;
+      }
+
+      .footer__content--vertical {
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 0.5rem;
+        padding-left: 0.85rem;
+      }
+
+      .footer__content--banner {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0rem 0.89rem 0.54rem 0.89rem;
+        padding: 0.14rem 0.23rem 0.19rem 0.40rem;
+        background-color: var(--dynamic-colour-delta);
+        color: var(--white);
+      }
+
+      .footer__content--banner + .footer__logo {
+        display: none;
+      }
+
+      .footer__image {
+        position: relative;
+        width: 2.64rem;
+        height: 2.64rem;
+        flex-shrink: 0;
+      }
+
+      .footer__content--vertical .footer__image {
+        width: 4.02rem;
+        height: 3.92rem;
+        margin-bottom: 0.165rem;
+      }
+
+      .footer__text {
+        flex: 1 0 0%;
+      }
+
+      .footer__content--horizontal .footer__text {
+        align-self: flex-end;
+        margin-left: 0.21rem;
+      }
+
+      .footer__text h1 {
+        font-size: 0.28rem;
+        line-height: 1.2;
+        font-weight: 300;
+        letter-spacing: -0.2pt;
+      }
+
+      .footer__content--vertical .footer__text h1 {
+        margin-bottom: 0.15rem;
+        font-size: 0.211rem;
+        line-height: 1.25;
+        letter-spacing: 0.1pt;
+        color: var(--dynamic-colour-gamma);
+      }
+
+      .footer__content--vertical .footer__text h2 {
+        font-size: 0.2rem;
+        line-height: 1.28;
+        font-weight: 300;
+        letter-spacing: 0;
+      }
+
+      .footer__content--banner h1 {
+        margin-top: 0.14rem;
+        font-size: 0.294rem;
+        font-weight: bold;
+        letter-spacing: 0.5pt;
+      }
+
+      .footer__content--banner h2 {
+        font-size: 0.25rem;
+      }
+
+      .footer__content--banner p {
+        font-size: 0.24rem;
+        margin-top: 0.21rem;
+      }
+
+      .footer__content--banner ul + p {
+        margin-top: 0.35rem;
+      }
+
+      .footer__content--banner ul {
+        margin-top: 0.23rem;
+      }
+
+      .footer__content--banner li {
+        position: relative;
+        margin-bottom: 0.08rem;
+        font-size: 0.24rem;
+        color: var(--white);
+        padding-left: 0.42rem;
+      }
+
+      .footer__content--banner li:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer__content--banner li:before {
+        content: '\2022';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .footer__content--banner h1:first-child,
+      .footer__content--banner h2:first-child,
+      .footer__content--banner p:first-child {
+        margin-top: 0;
+      }
+
+      .footer__content--vertical .footer__text h1:last-child,
+      .footer__content--vertical .footer__text h2:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer__text h2 {
+        font-size: 0.245rem;
+        line-height: 1.28;
+        font-weight: 300;
+        letter-spacing: -0.2pt;
+      }
+
+      .footer__text p {
+        margin-top: 0.19rem;
+        font-size: 0.199rem;
+        line-height: 1.2;
+        font-weight: 300;
+      }
+
+      .footer__text p em {
+        font-size: 1em;
+      }
+
+      .logo--default .footer__logo {
+        padding-bottom: 0.9rem;
+        width: 2.43rem;
+        font-size: 0;
+        margin-right: 1.15rem;
+      }
+
+      .logo--default .footer__content--horizontal  + .footer__logo {
+        align-self: center;
+      }
+
+      ..logo--default .footer__content--vertical .footer__logo {
+        padding-bottom: 0.45rem;
+        align-self: flex-end;
+      }
+
+      .toggleLogo--hide .footer__logo {
+        display: none;
+      }
+
+      .contact {
+        margin-top: 30pt;
+        color: var(--dynamic-cover-colour);
+        font-size: 17pt;
+      }
+
+      .contact h1 {
+        margin-bottom: 0.4em;
+        font-size: 16.5pt;
+        letter-spacing: -0.1pt;
+        line-height: 1.2;
+      }
+
+      .contact h2 {
+        margin-bottom: 0.4em;
+        font-size: 14.5pt;
+        letter-spacing: -0.1pt;
+        line-height: 1.2;
+      }
+
+      .contact p {
+        margin-bottom: 0.4em;
+        font-family: 'Bliss 2';
+        font-size: 13.2pt;
+        font-weight: normal;
+        line-height: 1.25;
+        letter-spacing: -0.35pt;
+      }
+
+      .contact h1:last-child,
+      .contact h2:last-child,
+      .contact p:last-child {
+        margin-bottom: 0;
+      }
+
+      .infographic__heading {
+        margin-bottom: 6pt;
+        padding-left: 9pt;
+        color: var(--dynamic-colour-omega);
+      }
+
+      .infographic__heading h1 {
+        margin-bottom: 6pt;
+        font-size: 22pt;
+        font-family: 'Chronicle Display';
+        line-height: 1.2;
+        letter-spacing: -0.2pt;
+      }
+
+      .infographic__heading h2 {
+        margin-bottom: 7pt;
+        font-size: 20pt;
+        line-height: 1.2;
+        font-family: 'Chronicle Display';
+      }
+
+      .infographic__heading h1:last-child,
+      .infographic__heading h2:last-child {
+        margin-bottom: 0;
+      }
+
+      .infographic__container {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+      }
+
+      .infographic {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .infographic__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 92pt;
+        margin: 0 4.6pt;
+      }
+
+      .infographic__circle {
+        position: relative;
+        margin-bottom: 5.7pt;
+        width: 70pt;
+        height: 70pt;
+        border-radius: 50%;
+        background: var(--dynamic-colour-beta);
+      }
+
+      .infographic__icon {
+        position: absolute;
+        max-width: 35pt;
+        max-height: 42pt;
+        object-fit: contain;
+        object-position: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .infographic__caption {
+        font-size: 8.7pt;
+        font-family: 'Bliss 2';
+        font-weight: 300;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .message {
+        position: relative;
+        font-size: 0.45rem;
+        line-height: 1.2;
+        font-style: italic;
+        display: none;
+      }
+
+      .message--cover {
+        color: var(--dynamic-cover-colour);
+      }
+
+      .brandMessage--this-is-uni .this-is-uni,
+      .brandMessage--rural-health-matter .rural-health-matter,
+      .brandMessage--ready-today-for-tomorrow .ready-today-for-tomorrow,
+      .brandMessage--research-making-a-difference .research-making-a-difference,
+      .brandMessage--experience-has-no-substitute .experience-has-no-substitute,
+      .brandMessage--alumni-making-a-difference .alumni-making-a-difference,
+      .brandMessage--world-class-facilities .world-class-facilities,
+      .brandMessage--free-text-option .free-text-option {
+        display: block;
+      }
+
+      .website {        
+        font-family: 'Bliss 2';
+        font-size: 15pt;
+        letter-spacing: -0.8pt;
+        line-height: 1.2em;
+        display: none;
+      }
+
+      .website--cover {
+        color: var(--dynamic-cover-colour);
+      }
+
+      .website--jcu-gp .jcu-gp,
+      .website--nqrth .nqrth,
+      .website--jcu-edu .jcu-edu,
+      .website--jcu-cmd .jcu-cmd {
+        display: block;
+      }
+
+      .backPageColor {
+        background-color: var(--dynamic-colour-delta);
+      }
+
+      .cricos__container {
+        position: absolute;
+        left: 100%;
+        white-space: nowrap;
+        transform: rotate(-90deg) translateY(-10px);
+        transform-origin: left bottom;
+        z-index: 999;
+      }
+
+      .crocos__container--frontCover {
+        bottom: 38pt;
+        left: 36pt;
+      }
+
+      .cricos__container--backCover {
+        bottom: 24pt;
+        transform: rotate(-90deg) translateY(-21pt);
+      }
+
+      .cricos,
+      .exportID {
+        font-family: 'Bliss 2';
+        font-size: 0.15rem;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+
+      .terms {
+        font-size: 9.1pt;
+        color: var(--dynamic-cover-colour);
+        margin-top: 13.4pt;
+        line-height: 1.2em;
+        letter-spacing: -0.5pt;
+        font-style: italic;
+      }
+
+      .u-mb-14 {
+        margin-bottom: 14pt;
+      }
+
+      .u-pt-3 {
+        padding-top: 3pt;
+      }
+
+      .u-pr-11 {
+        padding-right: 11pt;
+      }
+
+      .u-flex-1 { flex: 1 0 0%;}
+
+      .master {
+        display: none;
+      }
+      .secondary .logo.logo--front.logo--global > * {
+        display: none;
+      }
+
+      .logoGlobal--reversed .secondary .logo--fifty .full-color, .logoGlobal--reversed .secondary .logo--fifty .rev-mono {
+        display: none;
+
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="
+                                         themeColour--{{{JCU_theme-colour--cb}}}{{^JCU_theme-colour--cb}}blue{{/JCU_theme-colour--cb}}
+                                         coverTextColour--{{{JCU_cover-text-colour--cb}}}{{^JCU_cover-text-colour--cb}}white{{/JCU_cover-text-colour--cb}}
+                                         logoGlobal--{{JCU_logo-theme--cb}}{{^JCU_logo-theme--cb}}reversed{{/JCU_logo-theme--cb}}
+                                         website--{{{JCU_website--cb}}}{{^JCU_website--cb}}jcu-gp{{/JCU_website--cb}}"
+        data-reduce-export-font-size-by-percent="0" data-reduce-firefox-font-size-by-percent="0" data-prevent-export-overflow="false"
+        data-crop="{{show-crop}}">
+
+    <div class="master">
+      <div class="js-inject-src" data-target-id="cricos">{{{account.snippets.jcu-cricos}}}</div>
+    </div><!--master-->
+
+
+    {{#collection.JCU_panels--cb}}
+    {{#block.JCU_front-cover--cb}}
+    <div class="page
+                brandMessage--{{{JCU_brand-message--cb}}}{{^JCU_brand-message--cb}}this-is-uni{{/JCU_brand-message--cb}}
+                {{^JCU-customCover-logo}}default{{/JCU-customCover-logo}}
+                ">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_backgroundImage--cb}}}</div></div><!--backgroundImage-->
+          <div class="header header--cover">
+            <div class="banner__bg"></div><!--banner__bg-->
+            <div class="content" data-max-height="140">
+              <div class="content__title" data-max-line="1">{{{JCU_college-area-title--cb}}}</div><!--content__title-->
+
+              <div class="content__wrapper">
+                <div class="content__text u-heading-patch">{{{JCU_heading-text--cb}}}</div><!--content__text-->
+                <div class="content__release" data-max-line="1">{{{JCU_brochure-release-year--cb}}}</div><!--content__release-->
+              </div><!--content__wrapper-->
+
+            </div><!--content-->
+            <div class="logo logo--front logo--global">{{{account.snippets.vertical-logo}}}</div>
+            <img class="coverLogo" src="{{{JCU-customCover-logo}}}" />
+
+
+            <!--logo-->
+          </div><!--header-->
+          <div class="footer">
+            <div class="message message--cover this-is-uni">This is Uni... but not as you know it</div><!--message-->
+            <div class="message message--cover rural-health-matter">Making Rural Health Matter</div><!--message-->
+            <div class="message message--cover ready-today-for-tomorrow">Ready Today for Tomorrow</div><!--message-->
+            <div class="message message--cover research-making-a-difference">Research Making a Difference</div><!--message-->
+            <div class="message message--cover experience-has-no-substitute">Experience has no Substitute</div><!--message-->
+            <div class="message message--cover alumni-making-a-difference">Alumni Making a Difference</div><!--message-->
+            <div class="message message--cover world-class-facilities">World-Class Facilities</div><!--message-->
+            <div class="message message--cover free-text-option" data-max-line="1">{{{JCU_free-text-option--cb}}}{{^JCU_free-text-option--cb}}Free Text Option{{/JCU_free-text-option--cb}}</div><!--message-->
+            <div class="website website--cover jcu-gp">jcuGP.edu.au</div><!--website-->
+            <div class="website website--cover nqrth">nqrth.edu.au</div><!--website-->
+            <div class="website website--cover jcu-edu">jcu.edu.au</div><!--website-->
+            <div class="website website--cover jcu-cmd">jcu.edu.au/cmd</div><!--website-->
+          </div><!--footer-->
+          <div class="cricos__container crocos__container--frontCover">
+            <div class="cricos" data-target="cricos"></div><!--cricos-->
+            <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+          </div><!--cricos__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_front-cover--cb}}
+
+
+    {{#block.JCU_inner-panel-type-1}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="body body--inner1">
+            <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--cb}}}</div></div><!--backgroundImage-->
+            {{#JCU_heading--cb}}
+            <div class="heading__wrapper">
+              <div class="banner__bg"></div><!--banner__bg-->
+              <div class="heading" data-max-height="172">{{{JCU_heading--cb}}}</div><!--heading-->
+            </div><!--heading__wrapper-->
+            {{/JCU_heading--cb}}
+            {{#collection.JCU_centre-block--cb}}
+            <div class="centreBlock">
+              <div class="centreBlock__text" data-max-height="156">{{{JCU_text--cb}}}</div><!--centreBlock__text-->
+              {{#JCU_image--cb}}
+              <div class="centreBlock__image"><div class="reposition-fix">{{{JCU_image--cb}}}</div></div><!--centreBlock__image-->
+              {{/JCU_image--cb}}
+            </div><!--centreBlock-->
+            {{/collection.JCU_centre-block--cb}}
+          </div><!--body-->
+          {{#collection.JCU_infographic-block--cb}}
+          <div class="footer footer--inner1">
+            <div class="infographic__container">
+              <div class="infographic__heading" data-max-height="55">{{{JCU_heading--infographic--cb}}}</div><!--infographic__heading-->
+              <div class="infographic">
+                {{#collection.JCU_infographics--cb}}
+                {{#block.JCU_infographic--cb}}
+                <div class="infographic__item">
+                  <div class="infographic__circle">
+                    <img class="infographic__icon" src="{{{JCU_infographic-icon--cb}}}">
+                  </div><!--ingrographic__circle-->
+                  <div class="infographic__caption" data-max-line="6">{{{JCU_infographic-caption--cb}}}</div><!--infographic__caption-->
+                </div><!--infographic__item-->
+                {{/block.JCU_infographic--cb}}
+                {{/collection.JCU_infographics--cb}}
+              </div><!--infographic-->
+            </div><!--infographic__container-->
+          </div><!--footer-->
+          {{/collection.JCU_infographic-block--cb}}
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_inner-panel-type-1}}
+
+
+
+    {{#block.JCU_inner-panel-type-2}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit container--inner2">
+
+          <div class="contentBlock__container" data-max-height="dynamic">
+
+            {{#collection.JCU_content--cb}}
+            {{#block.JCU_photo-text-block--cb}}
+            <div class="contentBlock">
+              {{#JCU_image--cb}}
+              <div class="contentBlock__image {{^JCU_single-column-text--cb}}u-flex-1{{/JCU_single-column-text--cb}}"><div class="reposition-fix">{{{JCU_image--cb}}}</div></div><!--contentBlock__image-->
+              {{/JCU_image--cb}}
+              {{#JCU_single-column-text--cb}}
+              <div class="contentBlock__wrapper">
+                <div class="contentBlock__text">{{{JCU_single-column-text--cb}}}</div><!--contentBlock__text-->
+                <div class="contentBlock__terms">{{{JCU_t-cs--cb}}}</div><!--contentBlock__terms-->
+              </div><!--contentBlock__wrapper-->
+              {{/JCU_single-column-text--cb}}
+            </div><!--contentBlock-->
+            {{/block.JCU_photo-text-block--cb}}
+            {{#block.JCU_double-column-text--cb}}
+            <div class="contentBlock">
+              <div class="contentBlock__wrapper u-pr-11">
+                <div class="contentBlock__text u-mb-14">{{{JCU_heading--cb}}}</div><!--contentBlock__heading-->
+                <div class="contentBlock__text contentBlock__text--alt">{{{JCU_copy--cb}}}</div><!--contentBlock__text-->
+              </div><!--contentBlock__wrapper-->
+            </div><!--contentBlock-->
+            {{/block.JCU_double-column-text--cb}}
+            {{#block.JCU_photo-quote--cb}}
+            <div class="contentBlock u-pt-3 toogleEndMark--{{{JCU_toggle-end-mark--cb}}}{{^JCU_toggle-end-mark--cb}}show{{/JCU_toggle-end-mark--cb}}">
+              {{#JCU_image--cb}}
+              <div class="contentBlock__image contentBlock__image--alt {{^JCU_quote--cb}}u-flex-1{{/JCU_quote--cb}}"><div class="reposition-fix">{{{JCU_image--cb}}}</div></div><!--contentBlock__image-->
+              {{/JCU_image--cb}}
+              {{#JCU_quote--cb}}
+              <div class="quote__container">
+                <div class="quote quote--alt">{{{JCU_quote--cb}}}</div><!--quote-->
+                {{#JCU_quote--cb}}
+                <div class="endMark"></div><!--endMark-->
+                {{/JCU_quote--cb}}
+              </div><!--quote__container-->
+              {{/JCU_quote--cb}}
+            </div><!--contentBlock-->
+            {{/block.JCU_photo-quote--cb}}
+            {{/collection.JCU_content--cb}}
+          </div><!--contentBlock__container-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_inner-panel-type-2}}
+
+
+
+    {{#block.JCU_inner-panel-type-3}}
+    <div class="page 
+                logo--{{JCU_logo-theme--cb}}{{^JCU_logo-theme--cb}}full-colour{{/JCU_logo-theme--cb}}
+                toggleLogo--{{JCU_toggle-logo--cb}}{{^JCU_toggle-logo--cb}}show{{/JCU_toggle-logo--cb}}
+                logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                headerHeight--{{{header-height}}}{{^header-height}}large{{/header-height}}">
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="header header--inner3 header--threeCourses">
+            <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--cb}}}</div></div><!--backgroundImage-->
+            {{#JCU_banner-text--cb}}
+            <div class="banner__container u-heading-patch" style="min-height:{{{JCU_banner-location--cb}}}%;">
+              <div class="banner__wrapper">
+                <div class="banner__bg"></div><!--banner__bg-->
+                <div class="banner" data-max-height-unit="rem" data-max-height="4.7">{{{JCU_banner-text--cb}}}</div><!--banner-->
+              </div><!--banner__wrapper-->
+            </div><!--banner__container-->
+            {{/JCU_banner-text--cb}}
+          </div><!--header-->
+          {{#collection.JCU_content--cb}}
+          {{#block.JCU_three-courses--cb}}
+          <div class="body body--inner3 body--threeCourses">
+            {{#collection.JCU_courses--cb}}
+            <div class="column column--threeCourses">
+              <div data-max-height="dynamic">
+                <div class="text text--threeCourses">{{{JCU_text--cb}}}</div><!--text-->
+             </div><!--dynamic-check-overflow-->
+            </div><!--column-->
+            {{/collection.JCU_courses--cb}}
+          </div><!--body-->
+          {{/block.JCU_three-courses--cb}}
+
+          {{#block.JCU_two-courses--cb}}
+          <div class="body body--inner3 body--twoCourses">
+            {{#collection.JCU_courses--cb}}
+            <div class="column column--twoCourses">
+              <div data-max-height="dynamic">
+                <div class="text text--twoCourses">{{{JCU_text--cb}}}</div><!--text-->
+              </div><!--dynamic-check-overflow-->
+            </div><!--column-->
+            {{/collection.JCU_courses--cb}}
+          </div><!--body-->
+          {{/block.JCU_two-courses--cb}}
+
+          {{#block.JCU_one-course--cb}}
+
+          <div class="body body--inner3 body--oneCourses">
+            <div class="content content--oneCourse">
+              <div data-max-height="dynamic">
+                <div class="text text--oneCourse">{{{JCU_text--cb}}}</div><!--text-->
+              </div><!--content-->
+            </div><!--dynamic-check-overflow-->
+            <div class="image__container js-image-grid">
+              {{#collection.JCU_images--cb}}
+              <div class="image"><div class="reposition-fix">{{{JCU_image--cb}}}</div></div><!--images-->
+              {{/collection.JCU_images--cb}}
+            </div><!--images__container-->
+          </div><!--body-->
+          {{/block.JCU_one-course--cb}}
+          {{/collection.JCU_content--cb}}
+
+          <div class="footer footer--inner3">
+            {{#collection.JCU_footer--cb}}
+            {{#block.JCU_horizontal-photo-quote--cb}}
+            <div class="footer__content footer__content--horizontal" data-max-height-unit="rem" data-max-height="3.8">
+              {{#JCU_profile-image--cb}}
+              <div class="footer__image"><div class="reposition-fix">{{{JCU_profile-image--cb}}}</div></div><!--footer__image-->
+              {{/JCU_profile-image--cb}}
+              <div class="footer__text">{{{JCU_profile-text--cb}}}</div><!--footer__text-->
+            </div><!--footer__content-->
+            {{/block.JCU_horizontal-photo-quote--cb}}
+            {{#block.JCU_vertical-photo-quote--cb}}
+            <div class="footer__content footer__content--vertical">
+              <div class="footer--inner" data-max-height-unit="rem" data-max-height="5.6">
+                {{#JCU_profile-image--cb}}
+                <div class="footer__image"><div class="reposition-fix">{{{JCU_profile-image--cb}}}</div></div><!--footer__image-->
+                {{/JCU_profile-image--cb}}
+                <div class="footer__text">{{{JCU_profile-text--cb}}}</div><!--footer__text-->
+              </div><!--footer--inner-->
+            </div><!--footer__content-->
+            {{/block.JCU_vertical-photo-quote--cb}}
+            {{#block.JCU_footer-banner--cb}}
+            {{#JCU_footer-banner-text--cb}}
+            <div class="footer__content footer__content--banner" data-max-height-unit="rem" data-max-height="4.7">{{{JCU_footer-banner-text--cb}}}</div><!--footer__content-->
+            {{/JCU_footer-banner-text--cb}}
+            {{/block.JCU_footer-banner--cb}}
+            {{/collection.JCU_footer--cb}}
+            <div class="logo footer__logo logo--inner">{{{account.snippets.vertical-logo}}}</div>
+
+            <img class="footer__custom__logo" src="{{{JCU-custom-logo}}}" /><!--footer__logo-->
+          </div><!--footer-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_inner-panel-type-3}}
+
+
+
+    {{#block.JCU_inner-panel-type-4}}
+    <!--{{JCU_background-image--cb}}
+  {{JCU_banner-colour--cb}}
+  {{JCU_logo-theme--cb}}
+  {{JCU_quote-text--cb}}
+  {{JCU_quote-text-colour--cb}}
+  {{JCU_quote-reference--cb}}
+   {{JCU_toggle-quotation-marks--cb}}
+   {{JCU_brand-message--cb}}
+   {{JCU_free-text-option--cb}}
+   {{JCU_footer-text-colour--cb}}
+   -->
+    <div class="page
+                bannerColour--{{{JCU_banner-colour--cb}}}{{^JCU_banner-colour--cb}}orange{{/JCU_banner-colour--cb}}
+                logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                logo--{{JCU_logo-theme--cb}}{{^JCU_logo-theme--cb}}full-colour{{/JCU_logo-theme--cb}}
+                brandMessage--{{{JCU_brand-message--cb}}}{{^JCU_brand-message--cb}}this-is-uni{{/JCU_brand-message--cb}}
+                toggleQuotationMarks--{{{JCU_toggle-quotation-marks--cb}}}{{^JCU_toggle-quotation-marks--cb}}show{{/JCU_toggle-quotation-marks--cb}}
+                quoteTextColour--{{{JCU_quote-text-colour--cb}}}{{^JCU_quote-text-colour--cb}}light{{/JCU_quote-text-colour--cb}}
+                footerTextColour--{{{JCU_footer-text-colour--cb}}}{{^JCU_footer-text-colour--cb}}orange{{/JCU_footer-text-colour--cb}}">
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--cb}}}</div></div><!--backgroundImage-->
+          <div class="header header--inner4">
+            <div class="logo__container">
+              <div class="logo logo--inner logo--inner4">{{{account.snippets.vertical-logo}}}</div>
+              <img class="footer__custom__logo" src="{{{JCU-custom-logo}}}" /><!--logo-->
+            </div><!--logo__container-->
+          </div><!--header-->
+          <div class="body body--inner4">
+            {{#JCU_quote-text--cb}}
+            <div class="quote" data-max-height-unit="rem" data-max-height="10.51">
+              <div class="quote__bg"></div><!--quote__bg-->
+              <div class="quote__text">{{{JCU_quote-text--cb}}}</div><!--quoteText-->
+              <div class="quote__reference">{{{JCU_quote-reference--cb}}}</div><!--quote__reference-->
+            </div><!--quote-->
+            {{/JCU_quote-text--cb}}
+          </div><!--body-->
+          <div class="footer footer--inner4">
+            <div class="message message--inner4 this-is-uni">This is Uni... but not as you know it</div><!--message-->
+            <div class="message message--inner4 rural-healt-matter">Rural Health Matter</div><!--message-->
+            <div class="message message--inner4 ready-today-for-tomorrow">Ready Today for Tomorrow</div><!--message-->
+            <div class="message message--inner4 research-making-a-difference">Research Making a Difference</div><!--message-->
+            <div class="message message--inner4 experience-has-no-substitute">Experience has no Substitute</div><!--message-->
+            <div class="message message--inner4 alumni-making-a-difference">Alumni Making a Difference</div><!--message-->
+            <div class="message message--inner4 world-class-facilities">World-Class Facilities</div><!--message-->
+            <div class="message message--inner4 free-text-option" data-max-line="1">{{{JCU_free-text-option--cb}}}{{^JCU_free-text-option--cb}}Free Text Option{{/JCU_free-text-option--cb}}</div><!--message-->
+            <div class="website website--inner4 jcu-gp">jcuGP.edu.au</div><!--website-->
+            <div class="website website--inner4 nqrth">nqrth.edu.au</div><!--website-->
+            <div class="website website--inner4 jcu-edu">jcu.edu.au</div><!--website-->
+            <div class="website website--inner4 jcu-cmd">jcu.edu.au/cmd</div><!--website-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    {{/block.JCU_inner-panel-type-4}}
+
+
+    {{#block.JCU_back-cover}}
+    <div class="page {{^JCU_background-image--cb}}backPageColor{{/JCU_background-image--cb}}
+                {{^JCU-customBack-logo}}default{{/JCU-customBack-logo}}">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--cb}}}</div></div><!--backgroundImage-->
+          <div class="header header--backCover">
+            <div class="logo logo--backCover logo--global">{{{account.snippets.vertical-logo}}}</div>
+            <img class="logoBackPage" src="{{{JCU-customBack-logo}}}" />
+            <!--logo-->
+          </div><!--header-->
+          <div class="body body--backCover">
+            <div class="blurb" data-max-height="230">{{{JCU_back-cover-blurb--cb}}}</div><!--blurb-->
+          </div><!--body-->
+          <div class="footer footer--backCover">
+            {{#JCU_footer-text--cb}}
+            <div class="footerText__container">
+              <img class="footerText__logo footerText__logo--primary" src="https://files.outfit.io/media_library_items/110746/JCU-Logo---Shield-MONO-REV.png">
+              <img class="footerText__logo footerText__logo--secondary" src="https://files.outfit.io/media_library_items/117868/JCU%2520Logo%2520-%2520Shield%2520RGB.png">
+              <div class="footerText" data-max-height="80">{{{JCU_footer-text--cb}}}</div><!--footerText-->
+            </div><!--footerText__container-->
+            {{/JCU_footer-text--cb}}
+            <div class="contact" data-max-height="110">{{{JCU_contact-details--cb}}}</div><!--contact-->
+            <div class="terms" data-max-height="36">{{{JCU_terms-conditions--cb}}}</div><!--terms-->
+            <div class="cricos__container cricos__container--backCover">
+              <div class="cricos" data-target="cricos"></div><!--cricos-->
+              <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+            </div><!--cricos__container-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_back-cover}}
+
+    {{/collection.JCU_panels--cb}}
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script src="fontfaceobserver.js"></script>
+    <script>
+      
+      //Check Header Height
+      checkHeaderHeight();
+      function checkHeaderHeight(){
+       	var header = document.querySelectorAll(".header--threeCourses");
+        header.forEach(el=>{
+          var headerStyles = window.getComputedStyle(el);
+          var headerHeight = parseInt(headerStyles.getPropertyValue('height'));
+
+          var headerText  = el.querySelector(".banner");
+          var headerTextStyles = window.getComputedStyle(headerText);
+          var headerTextHeight = parseInt(headerTextStyles.getPropertyValue('height'));
+          
+          if(headerTextHeight+50 > headerHeight){
+            el.classList.add("overflow");
+          }
+          
+          });
+        
+      }
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+          checkHeaderHeight();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+
+
+
+      var font = new FontFaceObserver('Bliss 2'); 
+
+      font.load().then(function () {
+        console.log('Font is available');
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+        TextFit.fit({
+          selector: '.textFit'
+        });
+        checkHeaderHeight();
+      }, function () {
+        console.log('Font is not available');
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+
+
+      function imageCount() {
+        const imageGrids = document.querySelectorAll('.js-image-grid');
+        
+        imageGrids.forEach(imageGrid => {
+          const imagesLen = imageGrid.querySelectorAll('.image').length;
+          imageGrid.classList.add(`image__container--${imagesLen}`);
+        });
+      }
+
+      imageCount();
+
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+    </script>    
+
+  </body>
+</html>
