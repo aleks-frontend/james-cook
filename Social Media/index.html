@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+
+      :root {
+        --white: #fff;
+        --green: {{{account.colors.mid-green-delta}}};
+        --blue: {{{account.colors.dark-blue-delta}}};
+        --purple: #5D2E8F;
+        --red: #9D1D22;
+      }
+
+      .colourTheme--green  {
+        --dynamic-colour: var(--green);
+      }
+
+      .colourTheme--blue {
+        --dynamic-colour: var(--blue);
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple);
+      }
+
+      .colourTheme--red {
+        --dynamic-colour: var(--red);
+      }
+
+      html {
+        font-family: 'Chronicle SSm';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0pt 55pt 32pt 55pt;
+        height: 180pt;
+      }
+
+      .heading {
+        max-width: 540pt;
+        color: var(--white);
+        z-index: 9;
+        padding-bottom: 54px;
+      }
+
+      .heading h1 {
+        font-size: 57.6pt;
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .heading h2 {
+        font-size; 55pt;
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .logo {
+        width: 113pt;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom right;
+        z-index: 50;
+        font-size: 0;
+      }
+
+      .shape {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .shape__primary {
+        height: 311pt;
+        clip-path: polygon(0% 34%, 0% 100%, 100% 100%, 100% 0%);
+        background: var(--dynamic-colour);
+        opacity: 0.4;
+      }
+
+      .shape__secondary {
+        height: 203pt;
+        clip-path: polygon(0% 0%, 49% 96%, 100% 100%, 100% 29%);
+        z-index: 7;
+        background: var(--dynamic-colour);
+      }
+
+      .shape__tertiary {
+        top: 0;
+        height: 673pt;
+        clip-path: polygon(68.2% 0%, 86.3% 100%, 100% 25%, 100% 0%);
+        background: rgba(255, 255, 255, 0.9);
+        z-index: 7;
+        background: var(--white);
+        opacity: 0.4;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         colourTheme--{{{JCU_colour-theme--sm}}}{{^JCU_colour-theme--sm}}green{{/JCU_colour-theme--sm}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image-sm}}}</div></div><!--bakcgroundImage-->
+          <div class="shape shape__primary"></div><!--shape__secondary-->
+          <div class="shape shape__secondary"></div><!--shape__tertiary-->
+          <div class="shape shape__tertiary"></div><!--shape__primary-->
+          <div class="content">
+            <div class="heading" data-max-height="210">{{{JCU_heading--sm}}}</div><!--heading-->
+            {{#JCU_logo--sm}}
+            <img class="logo" src="{{JCU_logo--sm}}">
+            {{/JCU_logo--sm}}
+          </div><!--content-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      TextFit.fit({
+        selector: '.textFit-vert',
+        fitMode: 'vertical',
+        alignItems: 'flex-start'
+      });
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+		if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
