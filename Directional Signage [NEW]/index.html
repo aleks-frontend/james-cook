@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <!--
+    {{JCU_image--ds}}
+ {{JCU_theme-colour--ds}}
+    {{JCU_quote-text--ds}}
+    {{JCU_quote-text-colour--ds}}
+    {{JCU_heading--ds}}
+    {{JCU_directional-arrow--ds}}
+    {{JCU_website--ds}}
+ -->
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+
+      :root {
+        --white: {{{account.colors.white}}};
+        --black: #000;
+
+        --omega-blue: {{{account.colors.midnight-blue-omega}}};
+        --omega-green: {{{account.colors.dark-green-omega}}};
+        --omega-orange: {{{account.colors.dark-orange-omega}}};
+        --omega-red: {{{account.colors.dark-red-omega}}};
+      }
+
+      .themeColour--omega-blue .fit {
+        --dynamic-colour: var(--omega-blue)
+      }
+
+      .themeColour--omega-green .fit {
+        --dynamic-colour: var(--omega-green);
+      }
+
+      .themeColour--omega-orange .fit {
+        --dynamic-colour: var(--omega-orange);
+      }
+
+      .themeColour--omega-red .fit {
+        --dynamic-colour: var(--omega-red);
+      }
+
+      html {
+        font-family: 'Chronicle Display';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--dynamic-colour);
+      }
+
+      .header {
+        position: relative;
+        height: 4.35rem;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0.9rem 1.05rem;
+      }
+
+      .format--landscape .header {
+        height: 4.7rem;
+        padding: 1.1rem 1.18rem;
+      }
+
+      .quote {
+        position: relative;
+        font-family: 'Chronicle Display';
+        font-size: 0.49rem;
+        font-style: italic;
+        display: none;
+      }
+
+      .format--landscape .quote {
+        font-size: 0.5rem;
+      }
+
+      .quoteTextColour--white .quote {
+        color: var(--white);
+      }
+
+      .quoteTextColour--black .quote {
+        color: var(--black);
+      }
+
+      .quote--this-is-uni .this-is-uni,
+      .quote--rural-health-matter .rural-healt-matter,
+      .quote--ready-today-for-tomorrow .ready-today-for-tomorrow,
+      .quote--research-making-a-difference .research-making-a-difference,
+      .quote--experience-has-no-substitute .experience-has-no-substitute,
+      .quote--alumni-making-a-difference .alumni-making-a-difference,
+      .quote--world-class-facilities .world-class-facilities,
+      .quote--no-brand-message .no-brand-message {
+        display: block;
+      }
+
+      .body {
+        display: flex;
+        padding: 1.68rem 1.84rem 0rem;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .format--landscape .body {
+        padding: 1.79rem 2.3rem 0.2rem 2.2rem;
+      }
+
+      .heading {
+        color: var(--white);
+        font-size: 1.4rem;
+        line-height: 1.02em;
+        font-family: 'Chronicle Display Semi';
+      }
+
+      .format--portrait .heading {
+        margin-bottom: 14pt;
+      }
+
+      .format--landscape .heading {
+        font-size: 1.56rem;
+        line-height: 1.05em;
+      }
+
+      .arrow {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        align-items: center;
+      }
+
+      .arrow__img {
+        display: none;
+        height: 80%;
+        width: 100%;
+        max-width: 6.1rem;
+        max-height: 6.1rem;
+        object-fit: contain;
+      }
+
+      .directionalArrow--left .arrow__img--left,
+      .directionalArrow--right .arrow__img--right,
+      .directionalArrow--up .arrow__img--up,
+      .directionalArrow--down .arrow__img--down {
+        display: block;
+      }
+
+      .format--landscape .arrow__img {
+        height: 70%;
+        max-width: 7.05rem;
+        max-height: 4.8rem;    
+      }
+
+      .format--landscape .arrow__img--up,
+      .format--landscape .arrow__img--down {
+        height: 90%;
+        margin-top: 1rem;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 0rem 1rem 0.93rem 1.5rem;
+      }
+
+      .format--landscape .footer {
+        padding: 0rem 0.66rem 0.91rem 1.23rem;
+      }
+
+      .website {
+        font-family: 'Bliss 2';
+        font-weight: normal;
+        font-size: 0.49rem;
+        letter-spacing: -0.8pt;
+        color: var(--white);
+        flex: 1;
+        align-self: flex-end;
+        display: none;
+        padding-right: 50pt;  
+      }      
+
+      .website--jcu-gp .jcu-gp,
+      .website--nqrth .nqrth,
+      .website--jcu-edu .jcu-edu,
+      .website--jcu-cmd .jcu-cmd {
+        display: block;
+      }
+
+      .format--portrait .website {
+        padding-bottom: 7pt;
+      }
+
+      .format--landscape .website {
+        font-weight: 500;
+        font-size: 0.53rem;
+      }
+
+      .logo--default .logo {
+        display: block;
+        width: 2.51rem;
+      }
+      .logo {
+        display: block;
+      }
+
+      .logo--default .format--landscape .logo {
+        position: absolute;
+        right: 1.27rem;
+        bottom: 0.8rem;
+        width: 2.82rem;
+      }
+      .logo--default .custom__logo {
+        display: none;
+      }
+      .custom__logo{
+        width: 2.51rem;
+      }
+      .format--landscape .custom__logo {
+        position: absolute;
+        right: 1.27rem;
+        bottom: 0.8rem;
+        width: 2.82rem;
+      }
+
+      .logo path {
+        fill: var(--white);
+      }
+
+      .cricos__container {
+        position: absolute;
+        left: 0.86rem;
+        bottom: 1.07rem;
+        transform: rotate(-90deg);
+        transform-origin: left center;
+      }
+
+      .cricos,
+      .exportID {
+        font-family: 'Bliss 2';
+        font-size: 0.15rem;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+
+      .format--landscape .cricos__container {
+        left: 0.65rem;
+        bottom: 0.9rem;
+      }
+
+      .format--landscape .cricos,
+      .format--landscape .exportID {
+        font-size: 0.15rem;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                                         quote--{{{JCU_quote-text--ds}}}{{^JCU_quote-text--ds}}quote--this-is-uni{{/JCU_quote-text--ds}}
+                                         quoteTextColour--{{{JCU_quote-text-colour--ds}}}{{^JCU_quote-text-colour--ds}}black{{/JCU_quote-text-colour--ds}}
+                                         themeColour--{{{JCU_theme-colour--ds}}}{{^JCU_theme-colour--ds}}omega-orange{{/JCU_theme-colour--ds}}
+                                         directionalArrow--{{{JCU_directional-arrow--ds}}}{{^JCU_directional-arrow--ds}}right{{/JCU_directional-arrow--ds}}
+                                         website--{{{JCU_website--ds}}}{{^JCU_website--ds}}jcu-gp{{/JCU_website--ds}}
+                                         format--{{{JCU_format--ds}}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          {{#JCU_image--ds}}
+          <div class="header">
+            <div class="image"><div class="reposition-fix">{{{JCU_image--ds}}}</div></div><!--image-->
+            <div class="quote this-is-uni">This is Uni... but not as you know it</div><!--quote-->
+            <div class="quote rural-healt-matter">Rural Health Matter</div><!--quote-->
+            <div class="quote ready-today-for-tomorrow">Ready Today for Tomorrow</div><!--quote-->
+            <div class="quote research-making-a-difference">Research Making a Difference</div><!--quote-->
+            <div class="quote experience-has-no-substitute">Experience has no Substitute</div><!--quote-->
+            <div class="quote alumni-making-a-difference">Alumni Making a Difference</div><!--quote-->
+            <div class="quote world-class-facilities">World-Class Facilities</div><!--quote-->
+            <div class="quote no-brand-message"></div><!--quote-->
+          </div><!--header-->
+          {{/JCU_image--ds}}
+          <div class="body">
+            <div class="heading" data-max-line="3">{{{JCU_heading--ds}}}</div><!--heading-->
+            <div class="arrow">
+              <img class="arrow__img arrow__img--left" src="https://files.outfit.io/media_library_items/113085/arrow-hor-left.svg" alt="">
+              <img class="arrow__img arrow__img--right" src="https://files.outfit.io/media_library_items/113087/arrow-hor-right.svg" alt="">
+              <img class="arrow__img arrow__img--up" src="https://files.outfit.io/media_library_items/113086/arrow-vert-up.svg" alt="">
+              <img class="arrow__img arrow__img--down" src="https://files.outfit.io/media_library_items/113084/arrow-vert-down.svg" alt="">
+            </div><!--arrow-->
+          </div><!--body-->
+          <div class="footer">
+            <div class="website jcu-gp">jcuGP.edu.au</div><!--website-->
+            <div class="website nqrth">nqrth.edu.au</div><!--website-->
+            <div class="website jcu-edu">jcu.edu.au</div><!--website-->
+            <div class="website jcu-cmd">jcu.edu.au/cmd</div><!--website-->
+            <div class="logo">{{{account.snippets.vertical-logo}}}</div>
+            <img class="custom__logo" src="{{{JCU-custom-logo}}}" /><!--logo-->
+            <div class="cricos__container">
+              <div class="cricos">{{{account.snippets.jcu-cricos}}}</div><!--cricos-->
+              <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+            </div><!--cricos__container-->
+
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
