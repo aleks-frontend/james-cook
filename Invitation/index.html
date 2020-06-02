@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{ placeholder-image-2 }}
+  {{JCU_template-variation--inv}}
+  {{{JCU_background-image--inv}}}
+  {{JCU_background-overlay-opacity--inv}}
+  {{{JCU_front-text-colour--inv}}}
+  {{JCU_panel-colour--inv}}
+  {{{JCU_college-name--inv}}}
+  {{spreadsheet.invitation-details}}
+  {{{JCU_dates-to-remember--inv}}}
+  {{{JCU_lower-block--inv}}}
+  {{{JCU_logo-style--inv}}}
+  {{{JCU_website--inv}}}
+  {{JCU_toggle-side-back--inv}}
+  {{{JCU_background-image-back-page--inv}}}
+  {{JCU_banner-colour--inv}}
+  {{JCU_logo--inv}}
+  {{{JCU_quote-text--inv}}}
+  {{JCU_toggle-quotation-marks--inv}}
+  {{JCU_quotation-marks-colour--inv}}
+  {{{JCU_quote-reference--inv}}}
+  {{JCU_text-colour--inv}}
+  {{JCU_brand-message--inv}}
+  {{{JCU_free-text-message--inv}}}
+  {{{JCU_website-back--inv}}}
+
+--> 
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Engravers%20MT/stylesheet.css');
+
+      :root {
+        --omega-blue: {{{account.colors.midnight-blue-omega}}};
+        --omega-green:  {{{account.colors.dark-green-omega}}};
+        --omega-orange: {{{account.colors.dark-orange-omega}}};
+        --omega-red: {{{account.colors.dark-red-omega}}};
+        --delta-blue: {{{account.colors.dark-blue-delta}}};
+        --delta-green: {{{account.colors.mid-green-delta}}};
+        --delta-orange: {{{account.colors.mid-orange-delta}}};
+        --delta-red: {{{account.colors.mid-red-delta}}};
+        --shield-blue: {{{account.colors.primary}}};
+        --yellow: {{{account.colors.bright-orange-gamma}}};
+        --grey: {{{account.colors.grey}}};
+        --white: {{{account.colors.white}}};
+        --black-transparent: rgba(0, 0, 0,{{JCU_background-overlay-opacity--inv}});
+      }
+
+      .panelColour--blue {
+        --dynamic-colour: var(--delta-blue);
+      }
+
+      .panelColour--green {
+        --dynamic-colour: var(--delta-green);
+      }
+
+      .panelColour--orange {
+        --dynamic-colour: var(--delta-orange);
+      }
+
+      .panelColour--red {
+        --dynamic-colour: var(--delta-red);
+      }
+
+      .bannerColour--blue {
+        --dynamic-banner-colour: var(--omega-blue);
+      }
+
+      .bannerColour--green {
+        --dynamic-banner-colour: var(--omega-green);
+      }
+
+      .bannerColour--orange {
+        --dynamic-banner-colour: var(--omega-orange);
+      }
+
+      .bannerColour--red {
+        --dynamic-banner-colour: var(--omega-red);
+      }
+
+      .frontTextColour--white {
+        --dynamic-frontText-colour: var(--white);
+      } 
+
+      .frontTextColour--black {
+        --dynamic-frontText-colour: var(--grey);
+      }
+
+      .textColour--white {
+        --dynamic-text-colour: var(--white);
+      }
+
+      .textColour--black {
+        --dynamic-text-colour: var(--grey);
+      }
+
+      .textColour--blue {
+        --dynamic-text-colour: var(--delta-blue);
+      }
+
+      .textColour--green {
+        --dynamic-text-colour: var(--delta-green);
+      }
+
+      .textColour--orange {
+        --dynamic-text-colour: var(--delta-orange);
+      }
+
+      .textColour--red {
+        --dynamic-text-colour: var(--delta-red);
+      }
+
+      .quotationMarksColour--white {
+        --dynamic-quotes-colour: var(--white);
+      }
+
+      .quotationMarksColour--dark {
+        --dynamic-quotes-colour: var(--grey);
+      }
+
+      html {
+        font-family: 'Bliss 2';
+        font-size: 0.287rem;
+        font-weight: 500;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;        
+      }
+
+      .fit--frontPage {
+        background-color: var(--black-transparent);
+      }
+
+      .templateVariation--dlLandscape .fit--frontPage {
+        padding: 1.6rem 0rem 1.36rem 0rem;
+      }
+
+      .templateVariation--dlPortrait .fit--frontPage {
+        padding: 1.25rem 0rem 1.23rem 0rem;
+      }
+
+      .templateVariation--a5 .fit--frontPage {
+        padding: 1.1rem 0rem 1.07rem 0rem;
+      }
+
+      .templateVariation--dlLandscape .fit--backPage {
+        padding: 0rem 1.37rem 1.1rem 0rem;
+      }
+
+      .templateVariation--dlPortrait .fit--backPage {
+        padding-bottom: 1.15rem;
+      }
+
+      .templateVariation--a5 .fit--backPage {
+        padding: 0rem 1.21rem 1.32rem 0rem;
+      }
+
+
+      body[data-crop="false"] .templateVariation--a5 .fit--frontPage {
+        padding: unset;
+      }
+
+      body[data-crop="false"] .templateVariation--a5 .fit--backPage {
+        padding: unset;
+      }
+
+      body[data-crop="false"] .fit {
+        overflow: hidden;
+      }     
+
+      a:link, a:visited  {
+        text-decoration: none;
+        color: var(--white);
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .templateVariation--dlLandscape .header--frontPage {
+        height: 1.01rem;
+        padding: 0rem 1.54rem;
+      }
+
+      .templateVariation--dlPortrait .header--frontPage {
+        height: 2.58rem;
+        padding: 0rem 1.07rem;
+      }
+
+      .templateVariation--a5 .header--frontPage {
+        height: 3.32rem;
+        padding: 0rem 1.15rem;
+      }
+
+      .templateVariation--dlLandscape .header--backPage,
+      .templateVariation--dlPortrait .header--backPage,
+      .templateVariation--a5 .header--backPage {
+        height: 4rem;
+        padding: 0;
+      }
+
+      .templateVariation--dlLandscape-landscape .header--backPage,
+      .templateVariation--dlPortrait-landscape .header--backPage,
+      .templateVariation--a5-landscape .header--backPage {
+        height: 3.17rem;
+        padding: 0;
+      }
+
+      .heading {
+        position: relative;
+        color: var(--dynamic-frontText-colour);
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .templateVariation--dlLandscape .heading {
+        font-size: 0.45rem;
+      }
+
+      .templateVariation--dlPortrait .heading {
+        font-size: 0.348rem;
+      }
+
+      .templateVariation--a5 .heading {
+        font-size: 0.331rem;
+      }
+
+      .body {
+        flex: 1;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        color: var(--dynamic-frontText-colour);
+      }
+
+      .body--backPage {
+        justify-content: flex-end;
+      }
+
+      .templateVariation--dlLandscape .body--backPage {
+        padding-right: 10.7rem;
+      }
+
+      .panel {
+        position: relative;
+        display: flex;
+      }
+
+      .templateVariation--dlPortrait .panel,
+      .templateVariation--a5 .panel {
+        flex-direction: column;
+      }
+
+      .templateVariation--dlLandscape .panel {
+        padding: 0.45rem 1.66rem 0.2rem 1.56rem;
+      }
+
+      .templateVariation--dlPortrait .panel {
+        padding: 0.82rem 1.01rem 0.77rem 1.04rem;
+      }
+
+      .templateVariation--a5 .panel {
+        padding: 0.65rem 1.2rem 0.6rem 1.16rem;
+      }
+
+      .panel--bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-colour);
+        opacity: 0.9;
+      }
+
+      .invitational {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .templateVariation--dlPortrait .invitational,
+      .templateVariation--a5 .invitational {
+        border-bottom: 1.5px dotted var(--dynamic-frontText-colour);
+      }
+
+      .templateVariation--dlLandscape .invitational {
+        width: 8.3rem;
+        padding-right: 0.5rem;
+        border-right: 1px dotted var(--dynamic-frontText-colour);
+      }
+
+      .templateVariation--dlPortrait .invitational {
+        margin-bottom: 0.37em;
+      }
+
+      .templateVariation--a5 .invitational {
+        margin-bottom: 0.36em;
+      }
+
+      .invitational__label {
+        position: relative;
+        color: var(--dynamic-frontText-colour);
+        line-height: 1.2em;
+        font-weight: 300;
+      }
+
+      .invitational__label--inviter {
+        position: relative;
+        font-size: 0.535rem;
+      }
+
+      .invitational__label--primary,
+      .invitational__label--secondary {
+        display: none;
+      }
+
+      .templateVariation--dlLandscape .invitational__label--secondary,
+      .templateVariation--dlPortrait .invitational__label--secondary  {
+        display: block;
+      }
+
+      .templateVariation--a5 .invitational__label--secondary{
+        display: none !important;
+      }
+
+      .templateVariation--dlLandscape .invitational__label--secondary {
+        margin-bottom: 0.7em;
+        font-size: 0.535rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--dlPortrait .invitational__label--secondary {
+        margin-bottom: 1em;
+        font-size: 0.42rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--a5 .invitational__label--primary {
+        display: block;
+        margin-bottom: 0.9em;
+        font-size: 0.399rem;
+      }
+
+      .invitational__label--name {
+        font-family: 'Chronicle Display';
+        font-style: italic;
+      }
+
+      .templateVariation--dlLandscape .invitational__label--name {
+        margin-bottom: 0.4em;
+        font-size: 0.703rem;
+      }
+
+      .templateVariation--dlPortrait .invitational__label--name {
+        margin-bottom: 0.58em;
+        font-size: 0.55rem;
+      }
+
+      .templateVariation--a5 .invitational__label--name {
+        margin-bottom: 0.45em;
+        font-size: 0.52rem;
+      }
+
+      .examiner,
+      .attendee {
+        position: relative;
+        font-weight: 300;
+      }
+
+      .examiner__inner,
+      .attendee__inner {
+        font-weight: bold;
+      }
+
+      .templateVariation--dlLandscape .examinerOrAttendee--examiner .examiner--secondary,
+      .templateVariation--dlLandscape .examinerOrAttendee--attendee .attendee--secondary,
+      .templateVariation--dlPortrait .examinerOrAttendee--examiner .examiner--secondary,
+      .templateVariation--dlPortrait .examinerOrAttendee--attendee .attendee--secondary,
+      .templateVariation--a5 .examinerOrAttendee--examiner .examiner--primary,
+      .templateVariation--a5 .examinerOrAttendee--attendee .attendee--primary {
+        display: block;
+      }
+
+      .templateVariation--dlLandscape .examiner,
+      .templateVariation--dlLandscape .attendee {
+        font-size: 0.532rem;
+      }
+
+      .templateVariation--dlPortrait .examiner,
+      .templateVariation--dlPortrait .attendee {
+        margin-bottom: 1em;
+        font-size: 0.416rem;
+      }
+
+      .templateVariation--a5 .examiner,
+      .templateVariation--a5 .attendee {
+        margin-bottom: 0.8em;
+        font-size: 0.396rem;
+      }
+
+      /*  .templateVariation--dlLandscape .examiner__inner,
+      .templateVariation--dlLandscape .attendee__inner {
+      font-size: inherit;
+      } */
+
+      .templateVariation--dlPortrait .examiner__inner,
+      .templateVariation--dlPortrait .attendee__inner {
+        font-size: 0.419rem;
+      }
+
+      .templateVariation--a5 .examiner__inner,
+      .templateVariation--a5 .attendee__inner {
+        font-size: 0.394rem;
+      }
+
+      .dates {
+        position: relative;
+        font-weight: 300;
+      }
+
+      .templateVariation--dlPortrait .dates,
+      .templateVariation--a5 .dates {
+        border-bottom: 1.5px dotted var(--dynamic-frontText-colour);
+      }
+
+      .dates--secondary {
+        border: 0;
+      }
+
+      .frontTextColour--black .dates--secondary a {
+        color: var(--black);
+      }
+
+      .templateVariation--dlLandscape .dates {
+        width: 10.18rem;
+        padding: 0.1rem 0.35rem 0rem 0.65rem;
+        border-right: 1px dotted var(--dynamic-frontText-colour);
+      }
+
+      .templateVariation--dlLandscape .u-rsvp-hidden .dates {
+        flex: 1;
+        border: none;
+      }
+
+      .templateVariation--dlLandscape .dates--secondary {
+        padding: 0rem 0rem 0rem 0.5rem;
+        width: auto;
+      }
+
+      .templateVariation--dlPortrait .dates {
+        margin-bottom: 0.4em;
+      }
+
+      .templateVariation--a5 .dates {
+        margin-bottom: 0.25em;
+      }
+
+      .templateVariation--dlLandscape .dates--secondary,
+      .templateVariation--dlPortrait .dates--secondary,
+      .templateVariation--a5 .dates--secondary  {
+        margin-bottom: 0em;
+        border: 0;
+      }
+
+      .templateVariation--dlLandscape .dates h1,
+      .templateVariation--dlPortrait .dates h1,
+      .templateVariation--a5 .dates h1 {
+        text-transform: uppercase;
+        font-weight: bold;
+        line-height: 1em;
+      }
+
+      .templateVariation--dlLandscape .dates h1 {
+        margin-bottom: 0.9em;
+        font-size: 0.446rem;
+      }
+
+      .templateVariation--dlPortrait .dates h1 {
+        margin-bottom: 0.36em;
+        font-size: 0.35rem;
+      }
+
+      .templateVariation--a5 .dates h1 {
+        margin-bottom: 0.5em;
+        font-size: 0.326rem;
+      }
+
+      .templateVariation--dlLandscape .dates p {
+        font-size: 0.404rem;
+        line-height: 1.3em;
+      }
+
+      .templateVariation--dlPortrait .dates p {
+        font-size: 0.315rem;
+        line-height: 1.3em;
+      }
+
+      .templateVariation--a5 .dates p {
+        font-size: 0.397rem;
+        line-height: 1.2em;
+      }
+
+      .dates h1:last-child,
+      .dates p:last-child{
+        margin-bottom: 0.36rem;
+      }
+
+      .dates--secondary h1:last-child,
+      .dates--secondary p:last-child {
+        margin-bottom: 0rem;
+      }
+
+      .templateVariation--dlLandscape .dates p:last-child {
+        margin-bottom: 0rem;
+      }
+
+      .rsvp__container--landscape { display: none; }      
+
+      .templateVariation--dlLandscape .rsvp__container {
+        width: 6.4rem;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.07em;
+        justify-content: flex-end;
+      }
+
+      .templateVariation--dlLandscape .rsvp__container--landscape { display: flex; }
+      .templateVariation--dlLandscape .rsvp__container--landscape.u-hide { display: none; }
+      .templateVariation--dlLandscape .rsvp__container--portrait { display: none; } 
+
+
+      .rsvp {
+        position: relative;
+        display: none;
+        border-bottom: 1.5px dotted var(--dynamic-frontText-colour);
+        font-weight: 300;
+      }
+
+      .templateVariation--dlLandscape .rsvp--secondary,
+      .templateVariation--dlPortrait .rsvp--secondary,
+      .templateVariation--a5 .rsvp--primary {
+        display: block;
+      }
+
+      .templateVariation--dlLandscape .rsvp {
+        margin-bottom: 0.9em;
+        padding-left: 0.5rem;
+        font-size: 0.39rem;
+        border: 0;
+        line-height: 1.3em;
+      }
+
+      .templateVariation--dlPortrait .rsvp {
+        margin-bottom: 1.25em;
+        padding-bottom: 0.84em;
+        font-size: 0.306rem;
+        line-height: 1.3em;
+      }
+
+      .templateVariation--a5 .rsvp {
+        margin-bottom: 0.84em;
+        padding-bottom: 0.84em;
+        font-size: 0.388rem;
+      }
+
+      .templateVariation--dlLandscape .rsvp--naked,
+      .templateVariation--dlPortrait .rsvp--naked,
+      .templateVariation--a5 .rsvp--naked {
+        margin-bottom: 0em;
+        padding-bottom: 0em;
+        border: 0;
+      }
+
+      .templateVariation--dlLandscape .rsvp--naked {
+        padding-top: 0;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .templateVariation--dlLandscape .footer--frontPage {
+        height: 5rem;
+        padding: 0rem 1.7rem 0rem 2.27rem;
+      }
+
+      .templateVariation--dlPortrait .footer--frontPage {
+        height: 4.4rem;
+        padding: 0rem 1.02rem 0rem 1.078rem;
+      }
+
+      .templateVariation--a5 .footer--frontPage {
+        height: 3.7rem;
+        padding: 0rem 1.2rem 0rem 1.16rem;
+      }
+
+      .templateVariation--dlLandscape .footer--backPage {
+        height: 1.54rem;
+        padding: 0rem 1.47rem 0rem 1.15rem;
+      }
+
+      .templateVariation--dlPortrait .footer--backPage {
+        height: 2.27rem;
+        padding: 0rem 1.23rem 0rem 1.1rem;
+      }
+
+      .templateVariation--a5 .footer--backPage {
+        height: 1.24rem;
+        padding: 0rem 0.47rem 0rem 0.85rem;
+      }
+
+      .message {
+        position: relative;
+        font-family: 'Chronicle Display';
+        font-style: italic;
+        display: none;
+        color: var(--dynamic-text-colour);
+        line-height: 1.2em;
+      }
+
+      .templateVariation--dlLandscape .message {
+        width: 11.5rem;
+        font-size: 0.7rem;
+      }
+
+      .templateVariation--dlPortrait .message  {
+        width: 5.5rem;
+        font-size: 0.4rem;
+      }
+
+      .templateVariation--a5 .message {
+        width: 6rem;
+        font-size: 0.45rem;
+      }
+
+      .brandMessage--this-is-uni .this-is-uni,
+      .brandMessage--rural-health-matter .rural-healt-matter,
+      .brandMessage--ready-today-for-tomorrow .ready-today-for-tomorrow,
+      .brandMessage--research-making-a-difference .research-making-a-difference,
+      .brandMessage--experience-has-no-substitute .experience-has-no-substitute,
+      .brandMessage--alumni-making-a-difference .alumni-making-a-difference,
+      .brandMessage--world-class-facilities .world-class-facilities,
+      .brandMessage--no-brand-message .no-brand-message {
+        display: block;
+      }
+
+      .website__container {
+        position: relative;
+      }
+
+      .website {
+        position: relative;
+        display: none;
+        color: var(--dynamic-frontText-colour);
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .website--backPage {
+        display: flex;
+        justify-content: flex-end;
+        color: var(--dynamic-text-colour);
+      }
+
+      .website--jcugp .jcugp,
+      .website--nqrth .nqrth,
+      .website--jcu .jcu,
+      .website--cmd .cmd {
+        display: block;
+      }   
+
+      .templateVariation--dlLandscape .website--frontPage  {
+        font-size: 0.524rem;
+      }
+
+      .templateVariation--dlPortrait .website--frontPage  {
+        font-size: 0.404rem;
+        line-height: 1.1em;
+      }
+
+      .templateVariation--a5 .website--frontPage  {
+        font-size: 0.373rem;
+      }
+
+      .templateVariation--dlLandscape .website--backPage  {
+        margin-bottom: 0.15rem;
+        font-size: 0.636rem;
+      }
+
+      .templateVariation--dlPortrait .website--backPage  {
+        width: 5rem;
+        font-size: 0.39rem;
+      }
+
+      .templateVariation--a5 .website--backPage  {
+        margin-bottom: 0.07rem;
+        width: 5rem;
+        font-size: 0.326rem;
+      }
+
+      .logo {
+        position: relative;
+        object-fit: contain;
+        font-size: 0;
+      }
+
+      .logo--backPage {
+        position: absolute;
+      }
+      .logo--header {
+        position: absolute;
+      }
+      .customLogoBack {
+        position: absolute;
+      }
+      .logo--default .footer__custom__logo {
+        display: none;
+      }
+
+      .templateVariation--dlLandscape .logo--default .logo--target,  .templateVariation--dlLandscape .customLogo  {
+        margin-bottom: 0.12rem;
+        width: 3.92rem;
+      }
+
+      .templateVariation--dlPortrait .logo--default .logo--target, .templateVariation--dlPortrait .customLogo {
+        margin-bottom: 0.08rem;
+        width: 3.03rem;
+      }
+
+      .templateVariation--a5 .logo--default .logo--target, .templateVariation--a5 .customLogo  {
+        margin-bottom: 0.08rem;
+        width: 2.76rem;
+      }
+
+      .templateVariation--dlLandscape .logo--footer  {
+        margin-bottom: 0.12rem;
+        width: 3.92rem;
+      }
+
+      .templateVariation--dlPortrait .logo--footer {
+        margin-bottom: 0.08rem;
+        width: 3.03rem;
+      }
+
+      .templateVariation--a5 .logo--footer  {
+        margin-bottom: 0.08rem;
+        width: 2.76rem;
+      }
+      .templateVariation--dlLandscape .logo--defaultBack .logo--backPage, .templateVariation--dlLandscape .customLogoBack {
+        width: 2.93rem;
+        right: -0.07rem;
+        top: 0.73rem;
+      }
+
+      .templateVariation--dlPortrait .logo--defaultBack .logo--backPage, .templateVariation--dlPortrait .customLogoBack {
+        width: 2.45rem;
+        right: 0.93rem;
+        top: 0.81rem;
+      }
+
+      .templateVariation--a5 .logo--defaultBack .logo--backPage, .templateVariation--a5 .customLogoBack {
+        width: 2.37rem;
+        right: -0.07rem;
+        top: 0.81rem;
+      }
+       .templateVariation--dlLandscape .logo--header {
+        width: 2.93rem;
+        right: -0.07rem;
+        top: 0.73rem;
+      }
+
+      .templateVariation--dlPortrait .logo--header {
+        width: 2.45rem;
+        right: 0.93rem;
+        top: 0.81rem;
+      }
+
+      .templateVariation--a5 .logo--header{
+        width: 2.37rem;
+        right: -0.07rem;
+        top: 0.81rem;
+      }
+
+      .logoStyle--reversedMono #shield2 path,
+      .logoStyle--reversedMono #sun2 path,
+      .logoStyle--reversedMono #text2 path,
+      .logoStyle--reversed #shield2 path,
+      .logoStyle--reversed #text2 path,
+      .logo--reversedMono #shield path,
+      .logo--reversedMono #sun path,
+      .logo--reversedMono #text path,
+      .logo--reversed #shield path,
+      .logo--reversed #text path {
+        fill: var(--white);
+      }
+
+      .logoStyle--reversed #sun2 path,
+      .logoStyle--fullColour #sun2 path,
+      .logo--reversed #sun path,
+      .logo--fullColour #sun path{
+        fill: var(--yellow);
+      }
+     
+      .cricos__container {
+        position: absolute;
+        transform: rotate(270deg);
+        transform-origin: left bottom;
+        white-space: nowrap;
+        font-weight: bold;
+      }
+
+      .templateVariation--dlLandscape .cricos__container {
+        font-size: 0.23rem;
+      } 
+
+      .templateVariation--dlPortrait .cricos__container {
+        font-size: 0.174rem;
+      }
+
+      .templateVariation--a5 .cricos__container {
+        font-size: 0.17rem;
+      }
+
+      .cricos__container--frontPage {
+        color: var(--dynamic-frontText-colour);
+      }
+
+      .templateVariation--dlLandscape .cricos__container--frontPage {
+        bottom: 1.5rem;
+        left: 1.82rem;
+      } 
+
+      .templateVariation--dlPortrait .cricos__container--frontPage {
+        bottom: 1.35rem;
+        left: 0.71rem;
+      }
+
+      .templateVariation--a5 .cricos__container--frontPage {
+        bottom: 1.16rem;
+        left: 0.76rem;
+      }
+
+      .cricos__container--backPage {
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--dlLandscape .cricos__container--backPage {
+        bottom: 2.6rem;
+        right: -3rem;
+      } 
+
+      .templateVariation--dlPortrait .cricos__container--backPage {
+        top: 3.6rem;
+        left: 0.75rem;
+      }
+
+      .templateVariation--a5 .cricos__container--backPage {
+        bottom: 2.6rem;
+        right: -2.15rem;
+      }
+
+      .cricos,
+      .exportId {
+        display: inline-block;
+        font-weight: 300;
+      }
+
+      .textColour--orange .cricos__container--backPage,
+      .textColour--red .cricos__container--backPage,
+      .textColour--blue .cricos__container--backPage,
+      .textColour--green .cricos__container--backPage {
+        color: var(--grey);
+      }
+
+      .quote {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        font-weight: 300;
+        color: var(--white);        
+      }
+
+      .quote--bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-banner-colour);
+        opacity: 0.8;
+      }
+
+      .templateVariation--dlLandscape .quote {
+        max-height: 205px;
+        padding: 0.53rem 1rem 0.46rem 1.82rem;
+      }
+
+      .templateVariation--dlPortrait .quote  {
+        max-height: 550px;
+        padding: 0.5rem 1.4rem 0.51rem 1.29rem;
+      }
+
+      .templateVariation--a5 .quote {
+        max-height: 550px;
+        padding: 0.6rem 1rem 0.5rem 1.83rem;
+      }
+
+      .quote__text {
+        position: relative;
+        font-weight: 300;
+      }
+
+      .toggleQuotationMarks--show .quote__text:before,
+      .toggleQuotationMarks--show .quote__text:after {
+        content: '"';
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        background-size: 70%;
+        background-position: 60%;
+        background-repeat: no-repeat;
+        color: var(--dynamic-quotes-colour);
+        font-size: 1.95rem;
+        font-family: 'Engravers MT';
+      }
+
+      .toggleQuotationMarks--show .quote__text:before {
+        transform: rotate(180deg);
+      }
+
+      .templateVariation--dlLandscape .quote__text:before {
+        left: -1.1rem;
+        top: -0.62rem;
+      }
+
+      .templateVariation--dlPortrait .quote__text:before {
+        left: -1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--a5 .quote__text:before {
+        left: -1rem;
+        top: -0.72rem;
+      }
+
+      .templateVariation--dlLandscape .quote__text:after {
+        right: -0.92rem;
+        bottom: -0.66rem;
+      }
+
+      .templateVariation--dlPortrait .quote__text:after {
+        right: -1.12rem;
+        bottom: -0.66rem;
+      }
+
+      .templateVariation--a5 .quote__text:after {
+        right: -0.7rem;
+        bottom: -0.5rem;
+      }
+
+      .templateVariation--dlLandscape .quote__text {
+        font-size: 0.5rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--dlPortrait .quote__text {
+        font-size: 0.426rem;
+        line-height: 1.19em;
+      }
+
+      .templateVariation--a5 .quote__text {
+        font-size: 0.445rem;
+        line-height: 1.2em;
+      }
+
+      .quote__text .tinymce_style--light {
+        color: var(--white);
+      }
+
+      .quote__text .tinymce_style--dark {
+        color: var(--grey);
+      }
+
+      .quote__reference  {
+        position: relative;
+      }
+
+      .templateVariation--dlLandscape .quote__reference {
+        margin-top: 0.71em;
+        font-size: 0.44rem;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--dlPortrait .quote__reference {
+        margin-top: 0.71em;
+        font-size: 0.44rem;
+        line-height: 1em;
+      }
+
+      .templateVariation--a5 .quote__reference {
+        margin-top: 0.69em;
+        font-size: 0.44rem;
+        line-height: 0.9em;
+      }
+
+      .quote__reference h1,
+      .quote__reference h2 {
+        font-weight: 300;
+      }
+
+      .templateVariation--dlLandscape .quote__reference h1 {
+        font-size: 0.489rem;
+      }
+
+      .templateVariation--dlPortrait .quote__reference h1 {
+        font-size: 0.396rem;
+      }
+
+      .templateVariation--a5 .quote__reference h1 {
+        font-size: 0.392rem;
+      }
+
+      .templateVariation--dlLandscape .quote__reference h2 {
+        font-size: 0.441rem;
+      }
+
+      .templateVariation--dlPortrait .quote__reference h2 {
+        font-size: 0.346rem;
+      }
+
+      .templateVariation--a5 .quote__reference h2 {
+        font-size: 0.343rem;
+      }
+
+      .quote__reference strong {
+        font-weight: bold;
+      }
+      .quote__reference--noMargin .quote__reference  {
+        margin-top: 0;
+      }
+      .toggleQuotationMarks--show .quote__marks {
+        display: inline;
+      }
+
+      .toggleQuotationMarks--hide .quote__marks {
+        display: none;
+      }
+
+      .quotationMarksColour--white .quote__marks,
+      .quote__text .tinymce_style--light {
+        color: var(--white);
+      }
+
+      .quotationMarksColour--dark .quote__marks,
+      .quote__text .tinymce_style--dark {
+        color: var(--grey);
+      }
+
+      .quotationMarksColour--white .quote__text {
+        color: var(--white);
+      }
+
+      .quotationMarksColour--dark .quote__text {
+        color: var(--grey);
+      }
+
+      .quotationMarksColour--white .quote__reference {
+        color: var(--white);
+      }
+
+      .quotationMarksColour--dark .quote__reference {
+        color: var(--grey);
+      }
+
+      .errorPopup {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        padding: 2% 5%;
+        background: #fff;
+        border: 3px solid red;
+        transform: translate(-50%, -50%);
+        color: red;
+        font-size: 0.5rem;
+        z-index: 99;
+        text-align: center;
+      }
+
+      .errorPopup--show { display: block; }
+
+      /* Back Page Toggle */
+      .toggleSideBack--show .page--back {
+        display: block;
+      }
+
+      .toggleSideBack--hide .page--back {
+        display: none;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      .templateVariation--a4 .quote__reference.u-hide,
+      .templateVariation--a3 .quote__reference.u-hide,
+      .templateVariation--a5 .quote__reference.u-hide {
+        display: none;
+      }
+
+      .master {
+        display: none;
+      }
+      
+      .masterRepostion {
+        position: absolute;
+        opacity: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .templateVariation--dlPortrait .u-block-on-dl,
+      .templateVariation--dlLandscape .u-block-on-dl { display: block !important; }
+
+      .u-flex { display: flex; }     
+      .u-flex-justify-end { justify-content: flex-end; }       
+      .u-flex-col { flex-direction: column; }       
+      .u-flex-1 { flex: 1; }
+
+      .page {
+        height: 100vh !important;
+        width: 100vw !important;
+      }
+      .logo--default .customLogo {
+        display: none;
+      }
+      .logo--defaultBack .customLogoBack {
+        display: none;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{JCU_template-variation--inv}}{{^JCU_template-variation--inv}}a5{{/JCU_template-variation--inv}}
+                                         panelColour--{{JCU_panel-colour--inv}}{{^JCU_panel-colour--inv}}orange{{/JCU_panel-colour--inv}}
+                                         frontTextColour--{{{JCU_front-text-colour--inv}}}{{^JCU_front-text-colour--inv}}white{{/JCU_front-text-colour--inv}}
+                                         textColour--{{JCU_text-colour--inv}}{{^JCU_text-colour--inv}}orange{{/JCU_text-colour--inv}}
+                                         logoStyle--{{{JCU_logo-style--inv}}}{{^JCU_logo-style--inv}}reversedMono{{/JCU_logo-style--inv}}
+                                         logo--{{JCU_logo--inv}}{{^JCU_logo--inv}}fullColour{{/JCU_logo--inv}}
+                                         website--{{{JCU_website--inv}}}{{^JCU_website--inv}}jcu{{/JCU_website--inv}}
+                                         toggleSideBack--{{JCU_toggle-side-back--inv}}{{^JCU_toggle-side-back--inv}}show{{/JCU_toggle-side-back--inv}}
+                                         bannerColour--{{JCU_banner-colour--inv}}{{^JCU_banner-colour--inv}}orange{{/JCU_banner-colour--inv}}
+                                         brandMessage--{{JCU_brand-message--inv}}{{^JCU_brand-message--inv}}this-is-uni{{/JCU_brand-message--inv}}
+                                         toggleQuotationMarks--{{JCU_toggle-quotation-marks--inv}}{{^JCU_toggle-quotation-marks--inv}}show{{/JCU_toggle-quotation-marks--inv}}
+                                         quotationMarksColour--{{JCU_quotation-marks-colour--inv}}{{^JCU_quotation-marks-colour--inv}}white{{/JCU_quotation-marks-colour--inv}}
+                                         quote__reference--{{^JCU_quote-text--inv}}noMargin{{/JCU_quote-text--inv}}"
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+    <div class="masterRepostion">
+      <div class="js-inject-src" data-target-id="bg-image" data-is-reposition="true">{{{JCU_background-image--inv}}}</div> 
+      <div class="js-inject-src" data-target-id="bg-image-back" data-is-reposition="true">{{{JCU_background-image-back-page--inv}}}</div>           
+    </div>    
+    <div class="master">
+      <div class="js-inject-src" data-target-id="heading">{{{JCU_college-name--inv}}}</div>     
+      <div class="js-inject-src" data-target-id="dates">{{{JCU_dates-to-remember--inv}}}</div>
+      <div class="js-inject-src" data-target-id="lower-block">{{{JCU_lower-block--inv}}}</div>
+      <div class="js-inject-src" data-target-id="cricos">{{{account.snippets.jcu-cricos}}}<p class="exportId">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}} EXPORT ID {{/metadata}}</p></div>
+      <div class="js-inject-src" data-target-id="quote-text"><div class="quote__text u-heading-patch">{{{JCU_quote-text--inv}}}</div></div>
+      <div class="js-inject-src" data-target-id="quote-reference">{{{JCU_quote-reference--inv}}}</div>
+      <div class="js-inject-src" data-target-id="free-text">{{{JCU_free-text-message--inv}}}</div>
+      <div class="js-inject-src" data-target-id="website-back"> {{{JCU_website-back--inv}}}</div>
+      <div class="js-inject-src" data-target-id="customLogo"> <img class="footer__custom__logo" src="{{{JCU-custom-logo}}}" /></div>
+      <div class="js-inject-src" data-target-id="customLogoBack"> <img class="header__custom__logo" src="{{{JCU-custom-logoBack}}}" /></div>
+    </div> <!--master-->
+
+    {{ #spreadsheet.invitation-details }}
+    <div class="page page--front
+                logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--frontPage">
+          <div class="backgroundImage backgroundImage--frontPage" data-target="bg-image"></div> <!--backgroundImage--frontPage-->
+          <div class="errorPopup">Invalid data inputted. Please write "Examiner" or "Attendee" in <i>"Examiner or Attendee"</i> spreadsheet column</div>
+          <div class="js-invite-type-src u-hide">{{JCU_examiner-or-attendee--inv}}</div>
+          <div class="js-event-name-src u-hide">{{JCU_name-of-event--inv}}</div>
+          <div class="header header--frontPage">
+            <div class="heading" data-max-line="1" data-target="heading"></div> <!--heading-->
+          </div> <!--header-->
+          <div class="body body--frontPage">
+            <div class="panel js-panel u-heading-patch" data-max-height="dynamic">
+              <div class="panel--bg"></div> <!--panel--bg-->                 
+              <div class="invitational examinerOrAttendee--{{{JCU_examiner-or-attendee--inv}}}{{^JCU_examiner-or-attendee--inv}}examiner{{/JCU_examiner-or-attendee--inv}}">
+                {{#JCU_name-of-inviter--inv}}
+                <div class="invitational__label invitational__label--inviter invitational__label--primary">{{{JCU_name-of-inviter--inv}}} cordially invites</div> <!--invitational__label-->
+                <div class="invitational__label invitational__label--inviter invitational__label--secondary textFit"><div class="textFit">{{{JCU_name-of-inviter--inv}}}<br/>cordially invites</div></div> <!--invitational__label-->
+                {{/JCU_name-of-inviter--inv}}
+                {{#JCU_name-of-invitee--inv}}
+                <div class="invitational__label invitational__label--name textFit"> <div class="textFit">{{{JCU_name-of-invitee--inv}}}</div></div> <!--invitational__label--name-->
+                {{/JCU_name-of-invitee--inv}}
+                {{#JCU_name-of-event--inv}}
+                <div class="invitational__label invitational__label--inviter attendee attendee--secondary js-invite-type-target textFit"></div> <!--invitational__label--inviter-->
+                {{/JCU_name-of-event--inv}}
+              </div> <!--invitational-->
+              <div class="dates u-heading-patch" data-target="dates"></div> <!--dates-->
+              <div class="rsvp__container rsvp__container--portrait">
+                {{#JCU_rsvp-date--inv}}
+                <div class="rsvp rsvp--primary {{^JCU_lower-block--inv}}rsvp--naked{{/JCU_lower-block--inv}}">Please RSVP your availability by {{{JCU_rsvp-date--inv}}} using the attached form.</div> <!--rsvp-->
+                <div class="rsvp rsvp--secondary {{^JCU_lower-block--inv}}rsvp--naked{{/JCU_lower-block--inv}}">Please RSVP your availability by<br/>{{{JCU_rsvp-date--inv}}} using the attached form.</div> <!--rsvp-->
+                {{/JCU_rsvp-date--inv}}
+                <div class="dates dates--secondary u-heading-patch" data-target="lower-block"></div> <!--additionalInfo-->
+              </div><!--rsvp__container-->
+
+              <div class="rsvp__container rsvp__container--landscape js-empty-check-container">
+                <div class="u-flex u-flex-col u-flex-justify-end u-flex-1">
+                  <div data-max-height="dynamic">
+                    {{#JCU_rsvp-date--inv}}
+                    <div class="rsvp rsvp--primary {{^JCU_lower-block--inv}}rsvp--naked{{/JCU_lower-block--inv}} js-empty-check">Please RSVP your availability by {{{JCU_rsvp-date--inv}}} using the attached form.</div> <!--rsvp-->
+                    <div class="rsvp rsvp--secondary {{^JCU_lower-block--inv}}rsvp--naked{{/JCU_lower-block--inv}} js-empty-check">Please RSVP your availability by<br/>{{{JCU_rsvp-date--inv}}} using the attached form.</div> <!--rsvp-->
+                    {{/JCU_rsvp-date--inv}}
+                    <div class="dates dates--secondary u-heading-patch js-empty-check" data-target="lower-block"></div> <!--additionalInfo-->
+                  </div><!-- end dynamic -->
+                </div><!-- end u-flex-end -->
+              </div><!--rsvp__container-->
+
+            </div> <!--panel-->
+          </div> <!--body-->
+
+          <div class="footer footer--frontPage" data-target="footer">
+            <div class="website__container">
+              <div class="website website--frontPage jcugp">jcuGP.edu.au</div>
+              <div class="website website--frontPage nqrth">nqrth.edu.au</div>
+              <div class="website website--frontPage jcu">jcu.edu.au</div>
+              <div class="website website--frontPage cmd">jcu.edu.au/cmd</div>
+            </div> <!--website__container-->
+            <div class="logo logo--target">{{{account.snippets.vertical-logo-2}}}</div>
+            <div class="customLogo" data-target="customLogo"> </div>
+           
+            <!--logo--target-->
+            <!--logo-footer-->
+          </div> <!--footer-->
+          <div class="cricos__container cricos__container--frontPage">
+            <div class="cricos" data-target="cricos"></div><!--cricos-->
+          </div> <!--cricos__container-->
+        </div><!--container fit-->
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <div class="page page--back
+                logo--{{^JCU-custom-logoBack}}defaultBack{{/JCU-custom-logoBack}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPage">
+          <div class="backgroundImage backgroundImage--backPage" data-target="bg-image-back"></div> <!--backgroundImage--back-->
+          <div class="header header--backPage">
+            <div class="logo logo--backPage">{{{account.snippets.vertical-logo}}}</div> 
+            <div class="customLogoBack" data-target="customLogoBack"> </div>
+            <!--logo--backPage-->
+             
+          </div> <!--header--back-->
+          <div class="body body--backPage">
+            <div class="quote u-heading-patch" data-max-height="css">         
+              <div class="quote--bg"></div> <!--quote--bg-->
+              <div data-target="quote-text"></div> <!--quote__text-->
+              <div class="quote__reference u-heading-patch" data-target="quote-reference"></div> <!--quote__reference-->
+            </div> <!--quote-->
+          </div> <!--body--backPage-->
+          <div class="footer footer--backPage">
+            <div class="message__container">
+              <div class="message this-is-uni">This is Uni... but not as you know it</div>
+              <div class="message rural-healt-matter">Rural Health Matter</div>
+              <div class="message ready-today-for-tomorrow">Ready Today for Tomorrow</div>
+              <div class="message research-making-a-difference">Research Making a Difference</div>
+              <div class="message experience-has-no-substitute">Experience has no Substitute</div>
+              <div class="message alumni-making-a-difference">Alumni Making a Difference</div>
+              <div class="message world-class-facilities">World-Class Facilities</div>
+              <div class="message no-brand-message" data-max-line="1" data-target="free-text"></div>
+            </div> <!--message__container-->
+            <div class="website website--backPage" data-max-line="1" data-target="website-back"></div> <!--webisite-->
+          </div> <!--footer--backPage-->
+          <div class="cricos__container cricos__container--backPage">
+            <div class="cricos" data-target="cricos"></div><!--cricos-->
+          </div>  <!--cricos__container-->  
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{ /spreadsheet.invitation-details }}
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      function examinerAtendeeCheck() {
+        const pages = document.querySelectorAll('.page--front');
+        pages.forEach(page => {
+          const src = (page.querySelector('.js-invite-type-src').innerText).toLowerCase();
+          const target = page.querySelector('.js-invite-type-target');
+          const eventName = page.querySelector('.js-event-name-src').innerText;
+          const errorPopup = page.querySelector('.errorPopup');      
+
+          if ( target == null ) {
+            errorPopup.innerHTML = '<strong>Name of the event</strong> needs to be set';
+            errorPopup.classList.add('errorPopup--show');
+            return;
+          }
+
+          if ( src == 'attendee' ) {
+            target.innerHTML = `<div class="u-block-on-dl textFit">to attend event</div> <div class="attendee__inner textFit">${eventName}.</div>`;
+          } else if ( src == 'examiner' ) {
+            target.innerHTML = `<div class="u-block-on-dl textFit">to be an examiner in the</div> <div class="attendee__inner textFit">${eventName}.</div>`;
+          } else {
+            target.classList.add('u-hide');
+            errorPopup.classList.add('errorPopup--show');
+          }
+        })
+      }
+
+      function customEmptyCheck() {
+        const panels = document.querySelectorAll('.js-panel');
+        panels.forEach(panel => {
+          const container = panel.querySelector('.js-empty-check-container');
+
+          const elements = [...container.querySelectorAll('.js-empty-check')];
+          const allEmptyCheck = elements.every(element => (element.innerText == ''));
+
+          if ( allEmptyCheck ) {
+            container.classList.add('u-hide');
+            panel.classList.add('u-rsvp-hidden');
+          }
+        });
+      }
+
+      customEmptyCheck();
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+        examinerAtendeeCheck();
+
+        TextFit.fit({
+          selector: '.textFit'
+        });
+
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
