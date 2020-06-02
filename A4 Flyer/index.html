@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <!--
+{{ placeholder-toggle-new }}
+{{show-crop}}
+{{ placeholder-opacity }}
+{{ placeholder-image-1 }}
+{{ placeholder-image-2 }}
+{{JCU_logo--a4f}}
+{{JCU_supported-logo--a4f}}
+{{JCU_background-image--a4f}}
+{{JCU_theme-colour--a4f}}
+{{JCU_banner-text--a4f}}
+    -->
+
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20SSM/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Chronicle%20Display/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Engravers%20MT/stylesheet.css');
+
+      :root {
+        --shield-blue: {{{account.colors.primary}}};
+        --grey: {{{account.colors.grey}}};
+        --yellow: #EBB103;
+        --black: #000;
+        --white: #fff;
+
+        --alpha-blue: {{{account.colors.turquoise-alpha}}};
+        --alpha-green:  {{{account.colors.emerald-alpha}}};
+        --alpha-orange: {{{account.colors.peach-alpha}}};
+        --alpha-red: {{{account.colors.grape-alpha}}};
+
+        --omega-blue: {{{account.colors.midnight-blue-omega}}};
+        --omega-green:  {{{account.colors.dark-green-omega}}};
+        --omega-orange: {{{account.colors.dark-orange-omega}}};
+        --omega-red: {{{account.colors.dark-red-omega}}};
+
+        --gamma-blue: {{{account.colors.mid-blue-gamma}}};
+        --gamma-green:  {{{account.colors.bright-green-gamma}}};
+        --gamma-orange: {{{account.colors.bright-orange-gamma}}};
+        --gamma-red: {{{account.colors.bright-red-gamma}}};
+
+        --delta-blue: {{{account.colors.dark-blue-delta}}};
+        --delta-green:  {{{account.colors.mid-green-delta}}};
+        --delta-orange: {{{account.colors.mid-orange-delta}}};
+        --delta-red: {{{account.colors.mid-red-delta}}};
+      }
+
+      .themeColour--blue .banner__bg {
+        --dynamic-bannerColour: var(--gamma-blue);
+      }
+
+      .themeColour--green .banner__bg {
+        --dynamic-bannerColour: var(--gamma-green);
+      }
+
+      .themeColour--orange .banner__bg {
+        --dynamic-bannerColour: var(--gamma-orange);
+      }
+
+      .themeColour--red .banner__bg {
+        --dynamic-bannerColour: var(--gamma-red);
+      }
+
+      .themeColour--blue .text h1 {
+        --dynamic-titleColour: var(--delta-blue);
+      }
+      .themeColour--green .text h1 {
+        --dynamic-titleColour: var(--delta-green);
+      }
+      .themeColour--orange .text h1 {
+        --dynamic-titleColour: var(--delta-orange);
+      }
+      .themeColour--red .text h1 {
+        --dynamic-titleColour: var(--delta-red);
+      }
+
+      .themeColour--blue .content {
+        --dynamic-contentColour: var(--alpha-blue);
+      }
+      .themeColour--green .content {
+        --dynamic-contentColour: var(--alpha-green);
+      }
+      .themeColour--orange .content {
+        --dynamic-contentColour: var(--alpha-orange);
+      }
+      .themeColour--red .content {
+        --dynamic-contentColour: var(--alpha-red);
+      }
+
+      .textColour--grey {
+        --dynamic-text-colour: var(--grey);
+      }
+
+      .textColour--white {
+        --dynamic-text-colour: var(--white);
+      }
+
+      .quoteColour--blue {
+        --dynamic-quote-colour: var(--omega-blue);
+      }
+
+      .quoteColour--green {
+        --dynamic-quote-colour: var(--omega-green);
+      }
+
+      .quoteColour--orange {
+        --dynamic-quote-colour: var(--omega-orange);
+      }
+
+      .quoteColour--red {
+        --dynamic-quote-colour: var(--omega-red);
+      }
+
+      .footerTextColour--blue .message,
+      .footerTextColour--blue .website {
+        --dynamic-footerTextColour: var(--delta-blue);
+      }
+
+      .footerTextColour--green .message,
+      .footerTextColour--green .website{
+        --dynamic-footerTextColour: var(--delta-green);
+      }
+
+      .footerTextColour--orange .message,
+      .footerTextColour--orange .website{
+        --dynamic-footerTextColour: var(--delta-orange);
+      }
+
+      .footerTextColour--red .message,
+      .footerTextColour--red .website{
+        --dynamic-footerTextColour: var(--delta-red);
+      }
+
+      .footerTextColour--white .message,
+      .footerTextColour--white .website {
+        --dynamic-footerTextColour: var(--white);
+      }
+
+      .footerTextColour--grey .message,
+      .footerTextColour--grey .website {
+        --dynamic-footerTextColour: var(--grey);
+      }
+
+      .tinymce_style--dark {
+        color: var(--grey);
+      }
+
+      .tinymce_style--light {
+        color: var(--white);
+      }
+
+      html {
+        font-family: 'Chronicle Display';
+        font-size: 11pt;
+        color: var(--grey);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        flex-shrink: 0;
+        height: 291pt;
+        padding: 39pt 43pt 27pt 0pt;
+      }
+
+      .header--visualPage {
+        padding-right: 48pt;
+        padding-top: 32pt;
+      }
+
+      .logo__container {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        height: 64pt;
+      }
+
+      .logo__container--backPage {
+        position: absolute;
+        height: 80pt;
+        right: 42pt;
+        bottom: 309pt;
+        z-index: 1;
+      }
+
+      .logo--default .logo {
+        height: 100%;
+      }
+      .logo--pageOne {
+        display: none;
+      }
+      .logo--reversed.logo--default .logo--pageOne.logo--reversed {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+       .logo--full-colour.logo--default .logo--pageOne.logo--full-colour {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+        .logo--reversed-mono.logo--default .logo--pageOne.logo--reversed-mono {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+      .logo--defaultBack .customLogoBack {
+        display: none;
+      }
+      .logo--pageTwo {
+        display: none;
+      }
+      .logo--reversed.logo--defaultBack .logo--pageTwo.logo--reversed {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+       .logo--full-colour.logo--defaultBack .logo--pageTwo.logo--full-colour {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+        .logo--reversed-mono.logo--defaultBack .logo--pageTwo.logo--reversed-mono {
+        display: block;
+       width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+      .customLogoBack {
+        width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+     
+      .customLogo {
+        width: 100pt;
+        object-fit: contain;
+        object-position: right;
+      }
+      .logo--regular {
+        display: none;
+      }
+      .logo--default .logo--regular {
+        display: block;
+      }
+      .logo__supported {
+        margin-left: 15pt;
+      }
+
+      .logo--reversed  .logo--default .logo--reversed,
+     .logo--reversed-mono .logo--default .logo--reversed-mono,
+      .logo--full-colour  .logo--default .logo--full-colour {
+        display: block;
+      }
+
+      .logo--backPage {
+        width: 104pt;
+      }
+
+      .logo--reversed .logo--backPage,
+      .logo--reversed-mono .logo--backPage,
+      .logo--full-colour .logo--backPage {
+        display: block;
+      }
+
+      .logo--reversed-mono #shield path,
+      .logo--reversed-mono #sun path,
+      .logo--reversed-mono #text path,
+      .logo--reversed #shield path,
+      .logo--reversed #text path {
+        fill: var(--white);
+      }
+
+      .logo--reversed #sun path {
+        fill: var(--yellow);
+      }
+
+      .logo--full-colour #sun path {
+        fill: var(--yellow);
+      }
+
+      .logon--full-colour #shield path {
+        fill: var(--shield-blue);
+      }
+
+      .logo--full-colour #text path {
+        fill: var(--grey);
+      }
+      .logo--secondary .logo--regular img {
+        display: none;
+      }
+      
+   
+
+      .banner__container {
+        position: relative;
+        align-self: flex-end;
+        align-self: flex-start;
+      }
+
+      .banner {
+        position: relative;
+        padding: 10pt 18pt 10pt 37pt;
+      }
+
+      .banner__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom:  0;
+        left: 0;
+        background-color: var(--dynamic-bannerColour);
+        opacity: 0.5;
+      }
+
+      .banner h1 {
+        font-family: 'Chronicle Display';
+        font-size: 27.7pt;
+        color: var(--white);
+        line-height: 1.2em;
+        letter-spacing: -0.4pt;
+      }
+
+      .banner h2 {
+        font-family: 'Chronicle Display';
+        font-size: 24.6pt;
+        color: var(--white);
+      }
+
+      .body {
+        display: flex;
+        position: relative;
+        flex: 1;
+        padding: 31pt 39pt 31pt 43pt;
+      }
+
+      .body--backGeneric {
+        padding-top: 97pt;
+        padding-bottom: 10pt;
+      }
+
+      .body--visualPage {
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 31pt 50pt 33pt 25pt;
+      }
+
+      .hero {
+        position: relative;
+        height: 429pt;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      .column:nth-child(2) {
+        flex: 1.03;
+        margin-left: 25pt;
+      }
+
+      .text {
+        margin-bottom: 19pt;
+      }
+
+      .text h1 {
+        margin-top: 27pt;
+        margin-bottom: 6pt;
+        font-size: 14pt;
+        line-height: 1.2em;
+        color: var(--dynamic-titleColour);
+      }
+
+      .text h1:first-child {
+        margin-top: 0;
+      }
+
+      .text p {
+        margin-bottom: 5.6pt;
+        font-family: 'Bliss 2';
+        font-size: 7.9pt;
+        line-height: 1.35em;
+      }
+
+      .text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .text ul {
+        margin-bottom: 10pt;
+      }
+
+      .text li {
+        position: relative;
+        margin-bottom: 6.7pt;
+        padding-left: 11pt;
+        font-size: 7.9pt;
+        font-family: 'Bliss 2';
+        line-height: 1.25em;
+      }
+
+      .text li:last-child {
+        margin-bottom: 0
+      }
+
+      .text li:before {
+        content: '\2022';
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin-bottom: 19pt;
+        background-color: var(--dynamic-contentColour);
+      }
+
+      .content__text {
+        padding: 20pt 10pt 22pt 17pt;
+      }
+
+      .content__text h1 {
+        margin-bottom: 5.3pt;
+        font-size: 14.1pt;
+        line-height: 1.2em;
+      }
+
+      .content__text p {
+        margin-bottom: 7.4pt;
+        font-family: 'Bliss 2';
+        font-size: 7.9pt;
+        line-height: 1.2em;
+      }
+
+      .content__text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content__image {
+        position: relative;
+        height: 167pt;
+      }
+
+      .text:last-child,
+      .content:last-child {
+        margin-bottom: 0;
+      }
+
+      .message {
+        position: relative;
+        font-size: 19.3pt;
+        line-height: 1.2em;
+        font-style: italic;
+        color: var(--dynamic-footerTextColour);
+        display: none;
+      }
+
+      .brandMessage--this-is-uni .this-is-uni,
+      .brandMessage--rural-health-matter .rural-healt-matter,
+      .brandMessage--ready-today-for-tomorrow .ready-today-for-tomorrow,
+      .brandMessage--research-making-a-difference .research-making-a-difference,
+      .brandMessage--experience-has-no-substitute .experience-has-no-substitute,
+      .brandMessage--alumni-making-a-difference .alumni-making-a-difference,
+      .brandMessage--world-class-facilities .world-class-facilities,
+      .brandMessage--free-text-option .free-text-option {
+        display: block;
+      }
+
+      .quote {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        padding: 23pt 43pt 21pt 54pt;
+        font-weight: 300;
+        /*color: var(--white);*/
+      }
+
+      .quoteTextColour--light .quote {
+        color: var(--white);
+      }
+
+      .quoteTextColour--dark .quote {
+        color: var(--grey);
+      }
+
+      .quote__bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--dynamic-quote-colour);
+        opacity: 0.8;
+      }
+
+      .quote__text {
+        position: relative;
+        margin-bottom: 12pt;
+        font-size: 19.4pt;
+        font-family: 'Bliss 2';
+        line-height: 1.2em;
+      }
+
+      .quote__reference {
+        position: relative;
+      }
+
+      .quote__reference h1 {
+        margin-bottom: 10pt;
+        font-family: 'Bliss 2';
+        font-size: 18pt;
+        font-weight: 300;
+      }
+
+      .quote__reference p {
+        margin-bottom: 8pt;
+        font-family: 'Bliss 2';
+        font-size: 16pt;
+        font-weight: 300;
+      }
+
+      .quote__reference h1,
+      .quote__reference p {
+        margin-bottom: 0;
+      }
+
+      .quote__text:before,
+      .quote__text:after {
+        content: '"';
+        position: absolute;
+        background-position: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        font-size: 85pt;
+        font-family: 'Engravers MT';
+      }
+
+      .quote__text:before {
+        left: -44pt;
+        top: -30pt;
+        transform: rotate(180deg);
+      }
+
+      .quote__text:after {
+        right: -27pt;
+        bottom: -23pt;
+      }
+
+      .toggleQuotationMarks--hide .quote__text:before,
+      .toggleQuotationMarks--hide .quote__text:after {
+        display: none;
+      }
+
+      .footer--backPage {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 0pt 73pt 54pt 36pt;
+      }
+
+      .website {        
+        font-family: 'Bliss 2';
+        font-size: 16.5pt;
+        letter-spacing: -0.8pt;
+        color: var(--dynamic-footerTextColour);
+        line-height: 1.2em;
+        display: none;
+      }
+
+      .website--jcu-gp .jcu-gp,
+      .website--nqrth .nqrth,
+      .website--jcu-edu .jcu-edu,
+      .website--jcu-cmd .jcu-cmd {
+        display: block;
+      }
+
+      .cricos__container {
+        display: none;
+        position: absolute;
+        left: 0.42rem;
+        bottom: 1.25rem;
+        transform: rotate(-90deg);
+        transform-origin: left center;
+      }
+
+      .cricos,
+      .exportID {
+        font-family: 'Bliss 2';
+        font-size: 0.11rem;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+
+      .cricos__container--secondary .cricos,
+      .cricos__container--secondary .exportID {
+        color: var(--black);
+      }
+      
+      .u-show {
+        display: block;
+      }
+      .logo--default .customLogo {
+        display: none;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         themeColour--{{{JCU_theme-colour--a4f}}}{{^JCU_theme-colour--a4f}}orange{{/JCU_theme-colour--a4f}}
+                                         logo--{{JCU_logo--a4f}}{{^JCU_logo--a4f}}reversed{{/JCU_logo--a4f}}
+                                         logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                                         logo--{{^JCU-custom-logoBack}}defaultBack{{/JCU-custom-logoBack}}"
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page 
+                ">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--a4f}}}</div></div><!--backgroundImage-->
+            <div class="logo__container js-subtrahend">
+              <div class="logo--regular">
+                <img class="logo logo--pageOne logo--reversed" src="https://files.outfit.io/media_library_items/116822/JCU%2520Logo%2520-%2520Horizontal%2520REV.png">
+                <img class="logo logo--pageOne logo--full-colour" src="https://files.outfit.io/media_library_items/116823/JCU%2520Logo%2520-%2520Horizontal%2520RGB.pngg">
+                <img class="logo logo--pageOne logo--reversed-mono" src="https://files.outfit.io/media_library_items/116825/JCU%2520Logo%2520-%2520Horizontal%2520MONO%2520REV.png">
+              </div><!--logo--regular-->
+              <img class="customLogo" src="{{{JCU-custom-logo}}}" />
+              {{#JCU_supported-logo--a4f}}
+              <img class="logo logo__supported" src="{{JCU_supported-logo--a4f}}">
+              {{/JCU_supported-logo--a4f}}
+            </div><!--logo__container-->
+            {{#JCU_banner-text--a4f}}
+            <div class="banner__container u-heading-patch">
+              <div class="banner__bg"></div><!--banner__bg-->
+              <div class="banner" data-max-height="217">{{{JCU_banner-text--a4f}}}</div><!--banner-->
+            </div><!--banner__container-->
+            {{/JCU_banner-text--a4f}}
+          </div><!--header-->
+          <div class="body">
+            {{#collection.JC_column--a4f}}
+            <div class="column">
+              <div data-max-height="dynamic">
+                {{#collection.JCU_side-front-content--a4f}}
+                {{#block.JCU_text-block--a4f}}
+                <div class="text">{{{JCU_text--a4f}}}</div><!--text-->
+                {{/block.JCU_text-block--a4f}}
+                {{#block.JCU_image-text--a4f}}
+                <div class="content">
+                  <div class="content__text u-heading-patch">{{{JCU_text--a4f}}}</div><!--content__text-->
+                  {{#JCU_image--a4f}}
+                  <div class="content__image"><div class="reposition-fix">{{{JCU_image--a4f}}}</div></div><!--content__image-->
+                  {{/JCU_image--a4f}}
+                </div><!--content-->
+                {{/block.JCU_image-text--a4f}}
+                {{/collection.JCU_side-front-content--a4f}}
+              </div><!--dynamic-check-overflow-->
+            </div><!--column-->
+            {{/collection.JC_column--a4f}}
+          </div><!--body-->
+          <div class="cricos__container cricos__container--secondary">
+            <div class="cricos">{{{account.snippets.jcu-cricos}}}</div><!--cricos-->
+            <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+          </div><!--cricos__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    {{#collection.JCU_back-page--a4f}}
+
+
+    {{#block.JCU_generic-back-page--a4f}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="body body--backGeneric">
+            {{#collection.JCU_column--a4f}}
+            <div class="column">
+              <div data-max-height="dynamic">
+                {{#collection.JCU_body__content--a4f}}
+                {{#block.JCU_text-block--a4f}}
+                <div class="text">{{{JCU_text--a4f}}}</div><!--text-->
+                {{/block.JCU_text-block--a4f}}
+                {{#block.JCU_image-text--a4f}}
+                <div class="content">
+                  {{#JCU_text--a4f}}
+                  <div class="content__text">{{{JCU_text--a4f}}}</div><!--content__text-->
+                  {{/JCU_text--a4f}}
+                  {{#JCU_image--a4f}}
+                  <div class="content__image"><div class="reposition-fix">{{{JCU_image--a4f}}}</div></div><!--content__image-->
+                  {{/JCU_image--a4f}}
+                </div><!--content-->
+                {{/block.JCU_image-text--a4f}}
+                {{/collection.JCU_body__content--a4f}}
+              </div><!--dynamic-sheck-overflow-->
+            </div><!--column-->
+            {{/collection.JCU_column--a4f}}
+          </div><!--body--backGeneric-->
+          <div class="logo__container logo__container--backPage">
+            <img class="logo logo--pageTwo logo--reversed" src="https://files.outfit.io/media_library_items/116822/JCU%2520Logo%2520-%2520Horizontal%2520REV.png">
+            <img class="logo logo--pageTwo logo--full-colour" src="https://files.outfit.io/media_library_items/116823/JCU%2520Logo%2520-%2520Horizontal%2520RGB.pngg">
+            <img class="logo logo--pageTwo logo--reversed-mono" src="https://files.outfit.io/media_library_items/116825/JCU%2520Logo%2520-%2520Horizontal%2520MONO%2520REV.png">
+            <img class="customLogoBack" src="{{{JCU-custom-logoBack}}}" />
+          </div><!--logo__container-->
+          {{#JCU_lower-image--a4f}}
+          <div class="hero hero--generic"><div class="reposition-fix">{{{JCU_lower-image--a4f}}}</div></div><!--hero-->
+          {{/JCU_lower-image--a4f}}
+          <div class="cricos__container">
+            <div class="cricos">{{{account.snippets.jcu-cricos}}}</div><!--cricos-->
+            <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+          </div><!--cricos__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_generic-back-page--a4f}}
+
+    {{#block.JCU_visual-story--a4f}}
+
+    <!--
+ {{JCU_background-image--a4f}}
+ {{JCU_logo--a4f}}
+ {{JCU_banner-colour--a4f}}
+ {{JCU_quote-text--a4f}}
+ {{{JCU_quote-text-colour--a4f}}}
+ {{JCU_toggle-quotation-marks--a4f}}
+ {{JCU_quote-reference--a4f}}
+ {{JCU_footer-text-colour--a4f}}
+ {{JCU_brand-message--a4f}}
+ {{JCU_free-text-option--a4f}}
+ {{JCU_website--a4f}}
+
+ -->
+    <div class="page quoteColour--{{{JCU_banner-colour--a4f}}}{{^JCU_banner-colour--a4f}}orange{{/JCU_banner-colour--a4f}}
+                brandMessage--{{{JCU_brand-message--a4f}}}{{^JCU_brand-message--a4f}}this-is-uni{{/JCU_brand-message--a4f}}
+                toggleQuotationMarks--{{{JCU_toggle-quotation-marks--a4f}}}{{^JCU_toggle-quotation-marks--a4f}}show{{/JCU_toggle-quotation-marks--a4f}}
+                website--{{{JCU_website--a4f}}}{{^JCU_website--a4f}}jcu-gp{{/JCU_website--a4f}}
+                logo--{{JCU_logo--a4f}}{{^JCU_logo--a4f}}reversed{{/JCU_logo--a4f}}
+                quoteTextColour--{{{JCU_quote-text-colour--a4f}}}{{^JCU_quote-text-colour--a4f}}light{{/JCU_quote-text-colour--a4f}} 
+                footerTextColour--{{{JCU_footer-text-colour--a4f}}}{{^JCU_footer-text-colour--a4f}}orange{{/JCU_footer-text-colour--a4f}}">
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--a4f}}}</div></div><!--backgroundImage-->
+          <div class="header header--visualPage">
+            <div class="logo__container">
+              <div class="logo logo--backPage">{{{account.snippets.vertical-logo}}}</div><!--logo-->
+            </div><!--logo__container-->
+          </div><!--header-->
+          <div class="body body--visualPage">
+            {{#JCU_quote-text--a4f}}
+            <div class="quote" data-max-height="450">
+              <div class="quote__bg"></div><!--quote__bg-->
+              <div class="quote__text">{{{JCU_quote-text--a4f}}}</div><!--quoteText-->
+              <div class="quote__reference">{{{JCU_quote-reference--a4f}}}</div><!--quote__reference-->
+            </div><!--quote-->
+            {{/JCU_quote-text--a4f}}
+          </div><!--body-->
+          <div class="footer footer--backPage">
+            <div class="message this-is-uni">This is Uni... but not as you know it</div><!--quote-->
+            <div class="message rural-healt-matter">Rural Health Matter</div><!--quote-->
+            <div class="message ready-today-for-tomorrow">Ready Today for Tomorrow</div><!--quote-->
+            <div class="message research-making-a-difference">Research Making a Difference</div><!--quote-->
+            <div class="message experience-has-no-substitute">Experience has no Substitute</div><!--quote-->
+            <div class="message alumni-making-a-difference">Alumni Making a Difference</div><!--quote-->
+            <div class="message world-class-facilities">World-Class Facilities</div><!--quote-->
+            <div class="message free-text-option" data-max-line="1">{{{JCU_free-text-option--a4f}}}{{^JCU_free-text-option--a4f}}(Enter text into "Free Text Option" Input){{/JCU_free-text-option--a4f}}</div><!--quote-->
+            <div class="website jcu-gp">jcuGP.edu.au</div><!--website-->
+            <div class="website nqrth">nqrth.edu.au</div><!--website-->
+            <div class="website jcu-edu">jcu.edu.au</div><!--website-->
+            <div class="website jcu-cmd">jcu.edu.au/cmd</div><!--website-->
+            <div class="cricos__container">
+              <div class="cricos">{{{account.snippets.jcu-cricos}}}</div><!--cricos-->
+              <div class="exportID">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE{{/metadata}}</div><!--exportID-->
+            </div><!--cricos__container-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.JCU_visual-story--a4f}}
+
+    {{/collection.JCU_back-page--a4f}}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function injectCricos() {
+        const cricosContainer = document.querySelectorAll(".cricos__container");
+        cricosContainer[cricosContainer.length - 1].classList.add('u-show');
+      }
+
+      injectCricos();
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
