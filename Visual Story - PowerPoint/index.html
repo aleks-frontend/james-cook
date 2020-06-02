@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Bliss%202/stylesheet.css');
+
+      :root {
+        --omega-blue: rgba(32, 36, 78, 0.8);
+        --delta-blue: rgb(46, 49, 146, 0.8);
+        --omega-green:  rgba(0, 150, 57, 0.8);
+        --omega-orange: rgba(233, 79, 53, 0.8);
+        --omega-red: rgba(167, 43, 42, 0.8);
+        --shield-blue: {{{account.colors.primary}}};
+        --yellow: #EBB103;
+        --gray: {{{account.colors.grey}}};
+        --black: #000;
+        --white: #fff;
+      } 
+
+      .bannerColour--blue {
+        --dynamic-colour: var(--delta-blue);
+      }
+
+      .bannerColour--green {
+        --dynamic-colour: var(--omega-green);
+      }
+
+      .bannerColour--orange {
+        --dynamic-colour: var(--omega-orange);
+      }
+
+      .bannerColour--red {
+        --dynamic-colour: var(--omega-red);
+      }
+
+      html {
+        font-family: 'Bliss 2';
+        font-size: 11pt;
+        font-weight: 300;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        padding: 97pt 332pt 97pt 0pt;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo--default .logo, .footer__custom__logo {
+        position: absolute;
+        right: 42pt;
+        top: 35pt;
+        width: 136pt;
+      }
+
+      .logo--default .logoVariation--reversed .logo,
+      .logo--default .logoVariation--reversedMono .logo,
+      .logo--default .logoVariation--fullColour .logo {
+        display: block;
+      }
+
+      .logoVariation--reversedMono #shield path,
+      .logoVariation--reversedMono #sun path,
+      .logoVariation--reversedMono #text path,
+      .logoVariation--reversed #shield path,
+      .logoVariation--reversed #text path {
+        fill: var(--white);
+      }
+
+      .logoVariation--reversed #sun path {
+        fill: var(--yellow);
+      }
+
+      .logoVariation--fullColour #sun path {
+        fill: var(--yellow);
+      }
+
+      .logoVariation--fullColour #shield path {
+        fill: var(--shield-blue);
+      }
+
+      .logoVariation--fullColour #text path {
+        fill: var(--gray);
+      }
+        .logo--default .footer__custom__logo {
+        display: none;
+      }
+
+      .body {
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .quote {
+        position: relative;
+        padding: 14pt 40pt 14pt 40pt;
+        background-color: var(--dynamic-colour);
+      }
+
+      .quote__text {
+        font-size: 20.6pt;
+      }
+
+      .toggleQuotationMarks--show .quote__marks {
+        display: inline;
+      }
+
+      .toggleQuotationMarks--hide .quote__marks {
+        display: none;
+      }
+
+      .quotationMarksColour--white .quote__marks,
+      .quote__text--white {
+        color: var(--white);
+      }
+
+      .quotationMarksColour--black .quote__marks,
+      .quote__text--black {
+        color: var(--black);
+      }
+
+      .quote__reference  {
+        margin-top: 22pt;
+      }
+
+      .quote__reference p {
+        font-size: 20.2pt;
+        margin-bottom: 0.7em;
+      }
+
+      .quote__reference h1 {
+        font-size: 24pt;
+        margin-bottom: 0.7em;
+      }
+
+      .quote__reference p:last-child,
+      .quote__reference h1:last-child {
+        margin-bottom: 0;
+      }
+
+      .quote__reference strong {
+        font-weight: bold;
+      }
+
+      .cricos__container {
+        position: absolute;
+        left: calc(100% - 15pt);
+        bottom: 15pt;
+        transform: rotate(270deg);
+        text-transform: uppercase;
+        transform-origin: left bottom;
+        white-space: nowrap;
+        color: white !important;
+      }
+
+      .cricos,
+      .exportId { 
+        font-size: 8pt;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{{JCU_background-image--vs}}}
+  {{JCU_banner-colour--vs}}
+  {{JCU_logo-variation--vs}}
+  {{{JCU_qoute-text--vs}}}
+  {{JCU_toggle-quotation-marks--vs}}
+  {{JCU_quotation-marks-colour--vs}}
+  {{{JCU_quote-reference--vs}}}
+-->   
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         logo--{{^JCU-custom-logo}}default{{/JCU-custom-logo}}
+                                         logoVariation--{{JCU_logo-variation--vs}}{{^JCU_logo-variation--vs}}reversedMono{{/JCU_logo-variation--vs}}
+                                         bannerColour--{{JCU_banner-colour--vs}}{{^JCU_banner-colour--vs}}orange{{/JCU_banner-colour--vs}}
+                                         toggleQuotationMarks--{{JCU_toggle-quotation-marks--vs}}{{^JCU_toggle-quotation-marks--vs}}show{{/JCU_toggle-quotation-marks--vs}}
+                                         quote__text--{{JCU_quotation-marks-colour--vs}}{{^JCU_quotation-marks-colour--vs}}white{{/JCU_quotation-marks-colour--vs}}"
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage"><div class="reposition-fix">{{{JCU_background-image--vs}}}</div></div> <!--backgroundImage-->
+          <div class="logo">{{{account.snippets.vertical-logo}}}</div>
+          <img class="footer__custom__logo" src="{{{JCU-custom-logo}}}" /><!--logo-->
+          <div class="body">
+            <div class="quote" data-max-height="488">
+              <div class="quote__text">
+                {{#JCU_qoute-text--vs}}
+                <span class="quote__marks">"</span>{{{JCU_qoute-text--vs}}}<span class="quote__marks">"</span>
+                {{/JCU_qoute-text--vs}}
+              </div> <!--quote__text-->
+              {{#JCU_quote-reference--vs}}
+              <div class="quote__reference u-heading-patch">{{{JCU_quote-reference--vs}}}</div> <!--quote__reference-->
+              {{/JCU_quote-reference--vs}}
+            </div> <!--quote-->              
+          </div> <!--body-->         
+          <div class="cricos__container">
+            {{#JCU_cricos--vs}}
+            <div class="cricos">{{{account.snippets.jcu-cricos}}}</div> <!--cricos-->
+            {{/JCU_cricos--vs}}
+            <div><p class="exportId">{{#metadata}}OUT_{{export_id}}{{/metadata}}{{^metadata}}EXPORT ID WILL GO HERE</p>{{/metadata}}</div>
+          </div>  <!--cricos__container-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
